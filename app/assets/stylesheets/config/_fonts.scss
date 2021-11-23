@@ -9,6 +9,10 @@ $headers-font: "Inconsolata", "monospace";
 h1, h2, h3, h4, h5 {
   font-weight: 900 !important;
 }
+
+a {
+  font-family: "Inconsolata", "monospace";
+}
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";
