@@ -1,22 +1,50 @@
 <style>
-body {background: gray;}
+  body {background: #000;}
 </style>
 
+<br>
+<br>
+<div style="margin-left: 40px">
 
-<h1>This is an h1</h1>
-<h2>This is an h2</h2>
-<h3>This is an h3</h3>
-<p>This is a paragraph</p>
+<h1 style="color:white">This is an h1</h1>
+<p style="color:white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit finibus nibh. Vivamus accumsan sed nisi ut commodo. Vestibulum in lacus efficitur, tempor arcu eu, imperdiet est. In imperdiet vulputate ligula. Praesent at ipsum purus. Nam condimentum et urna vehicula rutrum. </p>
+<h2 style="color:white">This is an h2</h2>
+<p style="color:white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit finibus nibh. Vivamus accumsan sed nisi ut commodo. Vestibulum in lacus efficitur, tempor arcu eu, imperdiet est. In imperdiet vulputate ligula. Praesent at ipsum purus. Nam condimentum et urna vehicula rutrum. </p>
+<h3 style="color:white">This is an h3</h3>
+<p style="color:white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit finibus nibh. Vivamus accumsan sed nisi ut commodo. Vestibulum in lacus efficitur, tempor arcu eu, imperdiet est. In imperdiet vulputate ligula. Praesent at ipsum purus. Nam condimentum et urna vehicula rutrum. </p>
+<br>
+<br>
+<br>
 
 
 <%= link_to 'Start exploring', "#", class: "button-primary" %>
 
-<p>Form</p>
+<br>
+<br>
+<br>
+<br>
 
-<%= simple_form_for @user do |f| %>
-
-    <%= f.input :name %>
-
-  <%# <%= link_to 'Join course now', "#", class: " button" %>
+<h3 style="color:white">Form</h3>
+<div class="form-container">
+  <h2>Search</h2>
+  <%= simple_form_for :user, url: user_session_path do |f| %>
+    <div class="white-bordered-icon-input-container">
+      <%= f.input :name, as: :string, label: false, placeholder: "Topic" %>
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+      </div>
+    </div>
+    <%# input without icon %>
+    <div class="nowhite-input-container">
+      <%= f.input :name, as: :string, label: false, placeholder: "Topic" %>
+    </div>
+    <%# input with icon appended %>
+    <div class="nowhite-input-container">
+      <%= f.input :name, as: :string, label: false, placeholder: "Topic" %>
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+      </div>
+    </div>
   <% end %>
+</div>
 </div>
