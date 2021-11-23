@@ -1,0 +1,13 @@
+<h1>Test Articles</h1>
+
+<% @articles.each do |article| %>
+  <ul>
+    <li>
+      <a href=<%= article["url"]%>>
+        <%= article["author"] %>:
+        <%= article["name"] %>
+        <%= article["description"] %>
+      </a>
+    </li>
+  </ul>
+<% end %>
