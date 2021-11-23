@@ -1,0 +1,37 @@
+<style>
+body {background: gray;}
+</style>
+
+
+<h1>This is an h1</h1>
+<h2>This is an h2</h2>
+<h3>This is an h3</h3>
+<p>This is a paragraph</p>
+
+
+<%= link_to 'Start exploring', "#", class: "button-primary" %>
+
+<p>Form</p>
+
+<%= simple_form_for [] do |f| %>
+        <div class="d-flex justify-content-between">
+        <%= f.input :start_date, as: :date, html5: true, label: false, input_html: {class: "datepicker", placeholder: "Start date"}%>
+        <%= f.input :end_date, as: :date, html5: :true, label: false, input_html: {class: "datepicker", placeholder: "End date"}%>
+        </div>
+        <div id="calculate-container">
+          <div id="button-calculate-container">
+          <%= link_to "Calculate Price","#", class: 'calculate-price'%>
+          </div>
+        <div class='price-calculator-container d-flex justify-content-around'>
+          <span class="total-days"></span>
+          <span><strong class="total-price"></strong> </span>
+        </div>
+        </div>
+        <%if @course.user == current_user%>
+          <%= f.submit "Cannot book your own course", style: "background-color: grey;", class: "button", disabled: true %>
+        <%else %>
+          <%= f.submit "Book Now", class: "button" %>
+        <%end %>
+      <%# <%= link_to 'Join course now', "#", class: " button" %>
+      <% end %>
+    </div>
