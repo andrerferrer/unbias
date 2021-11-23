@@ -66,3 +66,9 @@ gem 'devise'
 gem 'faraday'
 
 gem 'json'
+
+# env for API keys
+gem 'dotenv-rails', groups: [:development, :test]
+
+# cloudinary
+gem 'cloudinary', '~> 1.16.0'
