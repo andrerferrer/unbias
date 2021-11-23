@@ -1,4 +1,4 @@
 class Entry < ApplicationRecord
-  belongs_to :user
+  belongs_to :comparison
   belongs_to :article
 end
