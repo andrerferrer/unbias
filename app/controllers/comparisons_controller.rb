@@ -55,12 +55,9 @@ class ComparisonsController < ApplicationController
     country_one = ""
     country_two = ""
 
-
     @url_worldmap = "#{BASE_URL}#{keyword}#{date}"
     @url_one = "#{@url_worldmap}#{publisher_one}#{country_one}"
     @url_two = "#{@url_worldmap}#{publisher_two}#{country_two}"
-
-    # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-31
   end
 
   def payload(url)
