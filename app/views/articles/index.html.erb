@@ -25,13 +25,14 @@
     <% @articles.each do |article| %>
       <div class="articles-card-container">
         <div class="articles-card-image">
-          <img src="<% article["image_url"]%>" alt="article image">
+          <!-- <img src="<% article["image_url"]%>" alt="article image"> -->
+          <img src="https://source.unsplash.com/random" alt="article image" class="articles-image">
         </div>
         <div class="article-card-info">
           <a href=<%= article["url"]%>>
-            <%= article["author"] %>:
-            <%= article["name"] %>
-            <%= article["description"] %>
+            <p><%= article["author"] %> </p>
+            <p><%= article["title"] %> </p>
+            <p><%= article["description"] %> </p>
           </a>
         </div>
         <div class="articles-card-date">
@@ -49,7 +50,7 @@
         <div class="article-card-info">
           <a href=<%= article["url"]%>>
             <p><%= article["author"] %> </p>
-            <p><%= article["name"] %> </p>
+            <p><%= article["title"] %> </p>
             <p><%= article["description"] %> </p>
           </a>
         </div>
