@@ -2,8 +2,8 @@
 
 <div class="maxi-search-bar-home">
   <%= simple_form_for @comparison do |f| %>
-    <%= f.input :publisher_one %>
-    <%= f.input :publisher_two %>
+    <%= f.input :publisher_one, collection: Comparison::SOURCES, selected: 1%>
+    <%= f.input :publisher_two, collection: Comparison::SOURCES, selected: 1%>
     <%= f.button :submit, 'Search'%>
   <% end %>
 
