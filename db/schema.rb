@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_115443) do
     t.string "api_error"
     t.string "comparison_name"
     t.string "comparison_desription"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_comparisons_on_user_id"
