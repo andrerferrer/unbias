@@ -48,18 +48,14 @@ class ComparisonsController < ApplicationController
   end
 
   def build_url(comparison)
-    # keyword = "&keywords=#{params[:comparison][:topic]}"
     keyword = "&keywords=#{comparison.topic}"
+    date = "&date=#{comparison.start_date},#{comparison.end_date}"
     publisher_one = "&sources=#{comparison.publisher_one}"
     publisher_two = "&sources=#{comparison.publisher_two}"
-    date = ""
     country_one = ""
     country_two = ""
 
-    # date = "&date=#{params[:start_date]}#{params[:end_date]}"
-    # Testing date: date = "&date=2020-12-24,2020-12-31"
 
-    # Add #{date} to url
     @url_worldmap = "#{BASE_URL}#{keyword}#{date}"
     @url_one = "#{@url_worldmap}#{publisher_one}#{country_one}"
     @url_two = "#{@url_worldmap}#{publisher_two}#{country_two}"
