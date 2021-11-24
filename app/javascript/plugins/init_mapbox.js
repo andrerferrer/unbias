@@ -9,22 +9,28 @@ const initMapbox = () => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v10',
-      center: [-28.673147, 5.599413],
-      zoom: 1.9
+      center: [-28.673147, 10.599413],
+      zoom: 2
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
-    console.log(markers)
-    markers.forEach((marker) => {
-      new mapboxgl.Marker()
-        .setLngLat([marker.lng, marker.lat])
-        .addTo(map);
-        // .setLngLat([45.702117, 42.395926])
-    });
 
+    addMarkersToMap(map, markers);
     fitMapToMarkers(map, markers);
 
   }
+};
+
+
+const addMarkersToMap = (map, markers) => {
+  markers.forEach((marker) => {
+    //const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this
+
+    new mapboxgl.Marker()
+      .setLngLat([marker.lng, marker.lat])
+      //.setPopup(popup) // add this
+      .addTo(map);
+  });
 };
 
 

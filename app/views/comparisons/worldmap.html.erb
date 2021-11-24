@@ -4,7 +4,13 @@
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
-<h1>Articles</h1>
+<div class="maxi-search-bar-home">
+  <%= simple_form_for @comparison do |f| %>
+    <%= f.input :publisher_one, collection: Comparison::SOURCES, selected: 1%>
+    <%= f.input :publisher_two, collection: Comparison::SOURCES, selected: 1%>
+    <%= f.button :submit, 'Search'%>
+  <% end %>
+  
 
 <div class="articles-compare-container">
   <div class=articles-left>
@@ -47,21 +53,3 @@
     <% end %>
   </div>
 </div>
-
-  <div class="row">
-    <div class="col-6" style="back">
-    <%# THIS IS BLACK WITH STATS %>
-    </div>
-    <div class="col-6">
-      <div class="board-card">
-      <div class="container">
-        <div class="row">
-          <div class="col-8">
-          </div>
-          <div class="col-4">
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
