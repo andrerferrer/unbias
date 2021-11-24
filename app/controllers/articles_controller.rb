@@ -9,10 +9,14 @@ class ArticlesController < ApplicationController
       {
         lat: 39.657325,
         lng: -4.024902
+        # info_window: render_to_string(partial: "info_window", locals: { article: article }),
+        # image_url: helpers.asset_url('REPLACE_THIS_WITH_YOUR_IMAGE_IN_ASSETS')
       },
       {
         lat: 49.657325,
         lng: -4.024902
+        # info_window: render_to_string(partial: "info_window", locals: { flat: flat }),
+        # image_url: helpers.asset_url('REPLACE_THIS_WITH_YOUR_IMAGE_IN_ASSETS')
       }
     ]
     # end
