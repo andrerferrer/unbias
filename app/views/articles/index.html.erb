@@ -1,32 +1,18 @@
 <h1>Test Articles</h1>
-
-<% @articles.each do |article| %>
-  <ul>
-    <li>
-      <a href=<%= article["url"]%>>
-        <p><%= article["author"] %>:
-        <%= article["title"] %></p>
-        <p><%= article["description"] %></p>
-      </a>
-    </li>
-  </ul>
-<% end %>
-
-
 <div id="map"
      style="width: 100%; height: 85vh;"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
-<h1>Articles</h1>
+<!-- <h1>Articles</h1>
 
 <div class="articles-compare-container">
   <div class=articles-left>
     <% @articles.each do |article| %>
       <div class="articles-card-container">
         <div class="articles-card-image">
-          <!-- <img src="<% article["image_url"]%>" alt="article image"> -->
-          <img src="https://source.unsplash.com/random" alt="article image" class="articles-image">
+        <img src="<% article["image_url"]%>" alt="article image">
+        <img src="https://source.unsplash.com/random" alt="article image" class="articles-image">
         </div>
         <div class="article-card-info">
           <a href=<%= article["url"]%>>
@@ -78,4 +64,4 @@
       </div>
       </div>
     </div>
-  </div>
+  </div>  -->
