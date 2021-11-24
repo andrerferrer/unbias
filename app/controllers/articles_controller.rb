@@ -11,6 +11,13 @@ class ArticlesController < ApplicationController
     payload
     @data = JSON.parse(@response.body)
     @articles = @data["data"]
+
+    # @markers = @articles.geocoded.map do |article|
+    #   {
+    #     lat: article.latitude,
+    #     lng: article.longitude
+    #   }
+    # end
   end
 
   private
