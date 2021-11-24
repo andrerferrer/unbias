@@ -7,19 +7,19 @@
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: -15;
+  filter: brightness(50%);
 }
 
-h1, h2 {
-  color: white;
-  font-family: Trebuchet MS;
-  font-weight: bold;
-  text-align: center;
+.video {
+  height: 100vh;
+  h1 {
+    color: white;
+    margin-left: 80px;
+    margin-top: 400px;
+  }
+  h2 {
+    color: white;
+    margin-left: 80px;
+  }
 }
-
-h1 {
-  font-size: 6rem;
-  margin-top: 30vh;
-}
-
-h2 { font-size: 3rem; }
