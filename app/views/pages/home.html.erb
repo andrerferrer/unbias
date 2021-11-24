@@ -6,3 +6,12 @@
   <h1>unbias.global</h1>
   <h2>Balance your views to shake up your bias</h2>
 </div>
+
+<div class="maxi-search-bar-home">
+  <%= simple_form_for Comparison.new do |f| %>
+    <%= f.input :topic %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.button :submit, 'Search'%>
+  <% end %>
+ </div>

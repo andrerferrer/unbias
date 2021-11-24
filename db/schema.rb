@@ -16,14 +16,18 @@ ActiveRecord::Schema.define(version: 2021_11_24_115443) do
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
-    t.string "name"
+    t.string "author"
     t.string "description"
-    t.string "image_url"
-    t.string "source_url"
-    t.string "source_name"
+    t.string "image"
+    t.string "url"
+    t.string "source"
     t.date "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "category"
+    t.string "country"
+    t.string "language"
   end
 
   create_table "comparisons", force: :cascade do |t|
