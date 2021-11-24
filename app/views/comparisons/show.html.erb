@@ -9,7 +9,7 @@
       <% @articles_one.each do |article| %>
         <div class="articles-card-container">
           <div class="articles-card-image">
-            <img src=<% article["image"]%> alt="article image">
+            <img src=<%= article["image"]%> alt="article image">
           </div>
           <div class="article-card-info">
             <p><%= article["category"].upcase %> </p>
@@ -37,7 +37,7 @@
             <p class="author">By: <%= article["author"] %> </p>
           </div>
           <div class="articles-card-image">
-            <img src=<% article["image"]%> alt="article image">
+            <img src=<%= article["image"]%> alt="article image">
           </div>
          </div>
       <% end %>
