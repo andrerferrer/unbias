@@ -1,10 +1,3 @@
-require 'faraday'
-require 'json'
-# maybe open-uri?
-sources = "&sources=cnn,bbc"
-countries = "&countries=gb,us,au"
-BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en&sort=popularity#{countries}"
-
 class ArticlesController < ApplicationController
   def index
     build_url

@@ -1,3 +1,16 @@
+<h1>Test Articles</h1>
+
+<% @articles.each do |article| %>
+  <ul>
+    <li>
+      <a href=<%= article["url"]%>>
+        <p><%= article["author"] %>:
+        <%= article["title"] %></p>
+        <p><%= article["description"] %></p>
+      </a>
+    </li>
+  </ul>
+<% end %>
 
 
 <div id="map"

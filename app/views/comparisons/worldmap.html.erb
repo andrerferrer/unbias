@@ -1,0 +1,20 @@
+<h1>Test Articles</h1>
+
+<div class="maxi-search-bar-home">
+  <%= simple_form_for @comparison do |f| %>
+    <%= f.input :publisher_one %>
+    <%= f.input :publisher_two %>
+    <%= f.button :submit, 'Search'%>
+  <% end %>
+
+<% @articles.each do |article| %>
+  <ul>
+    <li>
+      <a href=<%= article["url"]%>>
+        <p><%= article["author"] %>:
+        <%= article["title"] %></p>
+        <p><%= article["description"] %></p>
+      </a>
+    </li>
+  </ul>
+<% end %>
