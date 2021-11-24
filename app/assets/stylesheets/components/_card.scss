@@ -1,0 +1,40 @@
+.articles-compare-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+}
+
+.articles-left {
+  width: auto;
+  margin: 20px;
+}
+
+.articles-right {
+  width: auto;
+  margin: 20px;
+}
+
+.articles-card-container {
+  width: auto;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.articles-card-date {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 50px;
+}
+
+.article-card-info {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.articles-card-image {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 60px;
+}
