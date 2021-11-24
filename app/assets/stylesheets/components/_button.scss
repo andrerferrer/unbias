@@ -6,4 +6,10 @@
   box-sizing: border-box;
   border-radius: 16px;
   padding: 10px 20px;
+
+  &:hover {
+    color: #030303;
+    background: white;
+    text-decoration: none;
+  }
 }

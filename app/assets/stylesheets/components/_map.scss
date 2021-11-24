@@ -11,3 +11,12 @@
     border:1px solid gray;
     background-color:yellow;
 }
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}

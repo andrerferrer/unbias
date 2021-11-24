@@ -1,3 +1,9 @@
+.comparison-container {
+  h1 {
+    text-align: center;
+  }
+}
+
 .articles-compare-container {
   display: flex;
   justify-content: space-between;
@@ -5,34 +11,65 @@
 }
 
 .articles-left {
-  width: auto;
+  width: 50%;
   margin: 20px;
+  h2  {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 }
 
 .articles-right {
-  width: auto;
+  width: 50%;
   margin: 20px;
+  h2  {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 }
 
 .articles-card-container {
   width: auto;
-  height: 200px;
+  height: 268px;
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .articles-card-date {
   margin-left: 15px;
   margin-right: 15px;
-  width: 50px;
+  width: 120px;
+  align-items: center;
+  color: gray;
 }
 
 .article-card-info {
   margin-left: 15px;
   margin-right: 15px;
+  position: relative;
   a {
     text-decoration: none;
+  }
+  .info-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  .info-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  .author {
+    border-top: 1px grey solid;
+    position: absolute;
+    bottom: 0;
   }
 }
 
@@ -40,7 +77,7 @@
   margin-left: 15px;
   margin-right: 15px;
   img {
-    width: 60px;
-    width: 60px;
+    width: 150px;
+    height: 200px;
   }
 }
