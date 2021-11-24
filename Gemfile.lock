@@ -117,6 +117,7 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.4)
+    flatpickr (4.6.6.0)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
     geocoder (1.7.0)
@@ -292,6 +293,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   faraday
+  flatpickr
   font-awesome-sass
   geocoder
   jbuilder (~> 2.7)
