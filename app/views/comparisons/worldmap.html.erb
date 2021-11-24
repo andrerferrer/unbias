@@ -10,46 +10,14 @@
     <%= f.input :publisher_two, collection: Comparison::SOURCES, selected: 1%>
     <%= f.button :submit, 'Search'%>
   <% end %>
-  
-
-<div class="articles-compare-container">
-  <div class=articles-left>
-    <% @articles.each do |article| %>
-      <div class="articles-card-container">
-        <div class="articles-card-image">
-        <img src="<% article["image_url"]%>" alt="article image">
-        <img src="https://source.unsplash.com/random" alt="article image" class="articles-image">
-        </div>
-        <div class="article-card-info">
-          <a href=<%= article["url"]%>>
-            <p><%= article["author"] %> </p>
-            <p><%= article["title"] %> </p>
-            <p><%= article["description"] %> </p>
-          </a>
-        </div>
-        <div class="articles-card-date">
-          <%= article["published_at"] %>
-        </div>
-       </div>
-    <% end %>
-  </div>
-    <div class=articles-right>
-    <% @articles.each do |article| %>
-      <div class="articles-card-container">
-        <div class="articles-card-date">
-          <%= article["published_at"] %>
-        </div>
-        <div class="article-card-info">
-          <a href=<%= article["url"]%>>
-            <p><%= article["author"] %> </p>
-            <p><%= article["title"] %> </p>
-            <p><%= article["description"] %> </p>
-          </a>
-        </div>
-        <div class="articles-card-image">
-          <img src="<% article["image_url"]%>" alt="article image">
-        </div>
-       </div>
-    <% end %>
-  </div>
 </div>
+
+
+
+    <%# <% @articles.each do |article| %>
+          <a href=<%#= article["url"]%>>
+            <p><%#= article["author"] %> </p>
+            <p><%#= article["title"] %> </p>
+            <p><%#= article["description"] %> </p>
+          <%#=article["published_at"] %>
+    <%#  end %> %>
