@@ -8,4 +8,6 @@ class Comparison < ApplicationRecord
   # validates :country_two, if: (:publisher_one.nil? && :publisher_two.nil?), presence: true
   # validates :publisher_one, if: (:country_one.nil? && :country_two.nil?), presence: true
   # validates :publisher_two, if: (:country_one.nil? && :country_two.nil?), presence: true
+  PUBLISHERS = ["cnn",
+              "bbc"]
 end

@@ -8,19 +8,26 @@ BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e
 class ComparisonsController < ApplicationController
   def create
     @comparison = Comparison.new(strong_params)
+    @comparison.user = current_user
     if @comparison.save
-      redirect_to comparison_path(@comparison)
+      redirect_to worldmap_comparison_path(@comparison)
     else
-      raise
+      redirect_to root_path
     end
   end
 
-  def show
-    build_url
+  def worldmap
+    @comparison = Comparison.find(params[:id])
+    build_url(@comparison)
     payload
-    @data = JSON.parse(@response.body)
-    @articles = @data["data"]
-    render 'shared/articles'
+    @articles = JSON.parse(@response.body)["data"]
+  end
+
+  def update
+    @comparison = Comparison.find(params[:id])
+    @comparison.publisher_one = params[:publisher_one]
+    @comparison.publisher_two = params[:publisher_two]
+    # save in db?
   end
 
   private
@@ -29,9 +36,10 @@ class ComparisonsController < ApplicationController
     params.require(:comparison).permit(:topic, :start_date, :end_date)
   end
 
-  def build_url
-    keyword = "&keywords=#{params[:comparison][:topic]}"
+  def build_url(comparison)
+    # keyword = "&keywords=#{params[:comparison][:topic]}"
 
+    keyword = "&keywords=#{comparison.topic}"
     # date = "&date=#{params[:start_date]}#{params[:end_date]}"
     # Testing date: date = "&date=2020-12-24,2020-12-31"
 
@@ -67,6 +75,4 @@ class ComparisonsController < ApplicationController
       end
     end
   end
-
-
 end
