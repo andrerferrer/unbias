@@ -25,14 +25,20 @@ class ComparisonsController < ApplicationController
     @comparison = Comparison.find(params[:id])
     @comparison.publisher_one = params[:comparison][:publisher_one]
     @comparison.publisher_two = params[:comparison][:publisher_two]
+    if @comparison.save
+      redirect_to comparison_path(@comparison)
+    else
+      :update
+    end
+  end
+
+  def show
+    @comparison = Comparison.find(params[:id])
     build_url(@comparison)
     payload(@url_one)
     @articles_one = JSON.parse(@response.body)["data"]
     payload(@url_two)
     @articles_two = JSON.parse(@response.body)["data"]
-    # save in db?
-    redirect_to comparison_path(@comparison)
-    raise
   end
 
   private
