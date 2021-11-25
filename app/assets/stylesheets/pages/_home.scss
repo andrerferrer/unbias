@@ -26,3 +26,15 @@ flex-direction: column;
 #new_comparison {
   margin-top: 50px;
 }
+
+.search-icon-maxi {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  color: white;
+  background-color: $main-option-1;
+  &:hover{
+  color: black;
+  background-color: black;
+  }
+}

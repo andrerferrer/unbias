@@ -22,7 +22,7 @@ class EntriesController < ApplicationController
       else
         @article = Article.create(article)
         token = (@article.published_at.to_s + @article.title).gsub(/\s+/, "")
-        @Article.update(token: token)
+        @article.update(token: token)
       end
       Entry.create(article: @article, comparison: @comparison)
     end
