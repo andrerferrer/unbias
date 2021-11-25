@@ -9,15 +9,13 @@ const initMapbox = () => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v10',
-      center: [-28.673147, 10.599413],
-      zoom: 2
+      center: [10.673147, 30.599413],
+      zoom: 1.3
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
 
     addMarkersToMap(map, markers);
-    fitMapToMarkers(map, markers);
-
   }
 };
 

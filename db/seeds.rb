@@ -150,4 +150,62 @@ article_ten = Article.create!(
             published_at: "2021-08-05T15:20:57+00:00")
 
 puts "created #{Article.count} articles"
+
+puts "creating sources"
+
+source_one = Source.create!(
+                            name: "the star",
+                            source_keyword: "The Star online",
+                            address: "Jalan 16/11, 46350 Petaling Jaya, Selangor	Malaysia"
+                           )
+
+source_two = Source.create!(
+                            name: "the japan times",
+                            source_keyword: "search",
+                            address: "Ichibancho-Daini-TG Bldg., 2-2 Ichiban-cho, Chiyoda-ku, Tokyo 102-0082	Japan"
+                           )
+
+source_three = Source.create!(
+                            name: "jerusalem post",
+                            source_keyword: "Jerusalem Post",
+                            address: "Derech Ruppin, Jerusalem, Israel"
+                           )
+
+source_four = Source.create!(
+                            name: "haaretz",
+                            source_keyword: "Haaretz - Science &amp; Health",
+                            address: "Schocken 21, Tel Aviv, Israel, 61350	Israel"
+                           )
+
+source_five = Source.create!(
+                            name: "the journal",
+                            source_keyword: "thejournal",
+                            address: "Golden Lane, Latin Hall, Dublin 8.	Ireland"
+                           )
+
+source_six = Source.create!(
+                            name: "india times",
+                            source_keyword: "Indiatimes",
+                            address: "Times Of India Building, Dr DN Road, Fort — 400001.	India"
+                           )
+
+source_seven = Source.create!(
+                            name: "the hindu",
+                            source_keyword: "The Hindu",
+                            address: "The Hindu Kasturi Buildings 859 & 860 Anna Salai, Chennai Chennai District, Tamil Nadu India – 600002	India"
+                           )
+source_eight = Source.create!(
+                            name: "the new york times",
+                            source_keyword: "nytimes",
+                            address: "242 W 41st St, New York, NY 10036"
+                           )
+
+source_nine = Source.create!(
+                            name: "bbc",
+                            source_keyword: "bbc",
+                            address: "1 Television Centre, 101 Wood Lane W12 7FA London"
+                            )
+
+puts "Created #{Source.count} sources."
+
 puts "have a lovely day, your friend and savior Øyvind"
