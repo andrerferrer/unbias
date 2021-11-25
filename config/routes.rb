@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     member do
       get 'worldmap'
     end
+    # get 'create-entries', to: 'entries#create_entries'
+    get 'create-entries', to: 'entries#create_entries'
   end
-  resources :articles, only: [:index]
+
   resource :board, only: [:show]
   resources :entries, only: [:destroy]
-
 end
