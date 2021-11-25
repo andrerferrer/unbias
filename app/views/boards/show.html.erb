@@ -1,26 +1,28 @@
 
+
 <div class="row">
 
   <div class="col-sm-12 col-lg-7" style="background-color: black; min-height: 100vh;">
   </div>
 
   <div class="col-sm-12 col-lg-5">
-
+  <% @comparisons.each do |comparison|%>
     <div class="board-card">
       <div class="container">
         <div class="row">
           <div class="board-card-left col-lg-7">
-            <h3>Afghanistan</h3>
-            <p class="board-source">China Daily</p>
-            <p class="board-source">CNN</p>
+            <h3><%= comparison.topic %></h3>
+            <p class="board-source"><%= comparison.publisher_one%></p>
+            <p class="board-source"><%= comparison.publisher_two%></p>
           </div>
           <div class="board-card-right col-lg-5">
             <%= link_to "Open Comparison"%>
           </div>
         </div>
         <div class="row">
-          <div class="board-card-bottom col-lg-6">
-            <p>2021-03-01</p>
+          <div class="board-card-bottom col-lg-6 d-flex">
+            <p><%= comparison.start_date%></p>
+            <p><span>&nbspto </span><%= comparison.end_date%></p>
           </div>
           <div class="board-card-discussion-info col-lg-6 d-flex justify-content-between">
             <p>234</p>
@@ -34,99 +36,6 @@
       </div>
     </div>
   </div>
-
-  <div class="board-card">
-      <div class="container">
-        <div class="row">
-          <div class="board-card-left col-lg-7">
-            <h3>Afghanistan</h3>
-            <p class="board-source">China Daily</p>
-            <p class="board-source">CNN</p>
-          </div>
-          <div class="board-card-right col-lg-5">
-            <%= link_to "Open Comparison"%>
-          </div>
-        </div>
-        <div class="row">
-          <div class="board-card-bottom col-lg-6">
-            <p>2021-03-01</p>
-          </div>
-          <div class="board-card-discussion-info col-lg-6 d-flex justify-content-between">
-            <p>234</p>
-            <p>comments</p>
-            <p>See discussion</p>
-          </div>
-      </div>
-      <div class="row">
-        <div class="board-card-bottom-border col-lg-12">
-        </div>
-      </div>
-    </div>
-  </div>
-
-      <div class="board-card">
-      <div class="container">
-        <div class="row">
-          <div class="board-card-left col-lg-7">
-            <h3>Afghanistan</h3>
-            <p class="board-source">China Daily</p>
-            <p class="board-source">CNN</p>
-          </div>
-          <div class="board-card-right col-lg-5">
-            <%= link_to "Open Comparison"%>
-          </div>
-        </div>
-        <div class="row">
-          <div class="board-card-bottom col-lg-6">
-            <p>2021-03-01</p>
-          </div>
-          <div class="board-card-discussion-info col-lg-6 d-flex justify-content-between">
-            <p>234</p>
-            <p>comments</p>
-            <p>See discussion</p>
-          </div>
-      </div>
-      <div class="row">
-        <div class="board-card-bottom-border col-lg-12">
-        </div>
-      </div>
-    </div>
-  </div>
-
-      <div class="board-card">
-      <div class="container">
-        <div class="row">
-          <div class="board-card-left col-lg-7">
-            <h3>Afghanistan</h3>
-            <p class="board-source">China Daily</p>
-            <p class="board-source">CNN</p>
-          </div>
-          <div class="board-card-right col-lg-5">
-            <%= link_to "Open Comparison"%>
-          </div>
-        </div>
-        <div class="row">
-          <div class="board-card-bottom col-lg-6">
-            <p>2021-03-01</p>
-          </div>
-          <div class="board-card-discussion-info col-lg-6 d-flex justify-content-between">
-            <p>234</p>
-            <p>comments</p>
-            <p>See discussion</p>
-          </div>
-      </div>
-      <div class="row">
-        <div class="board-card-bottom-border col-lg-12">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
+<% end %>
   </div>
 </div>
