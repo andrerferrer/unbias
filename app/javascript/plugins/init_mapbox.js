@@ -9,8 +9,8 @@ const initMapbox = () => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v10',
-      center: [-28.673147, 10.599413],
-      zoom: 2
+      center: [10.673147, 30.599413],
+      zoom: 1.3
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
@@ -27,7 +27,8 @@ const addMarkersToMap = (map, markers) => {
     //const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this
 
     new mapboxgl.Marker()
-      .setLngLat([marker.lng, marker.lat])
+      // .setLngLat([marker.lng, marker.lat])
+      .setLngLat([41.37847940823762, 2.1796691432813606])
       //.setPopup(popup) // add this
       .addTo(map);
   });

@@ -19,6 +19,21 @@ class ComparisonsController < ApplicationController
     build_url(@comparison)
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
+    @markers = #@articles.geocoded.map do |article|
+      [{
+        # lat: article.latitude,
+        # lng: article.longitude
+        lat: 2.1796691432813606,
+        lng: 41.37847940823762,
+        info_window: render_to_string(partial: "info_window")
+      },
+       {
+        # lat: article.latitude,
+        # lng: article.longitude
+        lat: 41.413763,
+        lng: 2.158040
+      }]
+    # end
   end
 
   def update
@@ -32,7 +47,6 @@ class ComparisonsController < ApplicationController
     @articles_two = JSON.parse(@response.body)["data"]
     # save in db?
     redirect_to comparison_path(@comparison)
-    raise
   end
 
   private
