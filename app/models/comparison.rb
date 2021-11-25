@@ -1,6 +1,7 @@
 class Comparison < ApplicationRecord
   belongs_to :user
   has_many :entries, dependent: :destroy
+  has_many :articles, through: :entries
   validates :topic, presence: true
   # validates :start_date, presence: true
   # validates :end_date, presence: true

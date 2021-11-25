@@ -1,6 +1,7 @@
 <div class="comparison-container">
   <h1>News comparison</h1>
 
+ <%# <%= @articles_first_batch = @articles.first(5) %>
 
 
   <div class="articles-compare-container">
@@ -22,8 +23,9 @@
           </div>
          </div>
       <% end %>
+
     </div>
-      <div class=articles-right>
+      <div class="articles-right">
       <h2>View 2</h2>
       <% @articles_two.each do |article| %>
         <div class="articles-card-container">
@@ -43,4 +45,6 @@
       <% end %>
     </div>
   </div>
+
+  <%= link_to 'Save', comparison_create_entries_path(@comparison), method: :post %>
 </div>
