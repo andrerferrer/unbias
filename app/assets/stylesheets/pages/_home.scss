@@ -5,8 +5,24 @@ display: flex;
 flex-direction: column;
 }
 
-.maxi-search-bar-home {
-  width: 300px;
-  margin: 0px auto;
+.maxi-container-home {
+  margin-left: 80px;
+}
+
+#sub-header-home {
+  margin-top: 20px;
   color: white;
+}
+
+.maxi-search-bar-home {
+  margin: 30px auto;
+  color: white;
+}
+
+.simple_form div {
+  display: inline-block;
+}
+
+#new_comparison {
+  margin-top: 50px;
 }
