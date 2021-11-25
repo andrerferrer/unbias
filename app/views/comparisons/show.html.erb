@@ -1,46 +1,5 @@
-<div class="comparison-container">
-  <h1>News comparison</h1>
-
-
-
-  <div class="articles-compare-container">
-    <div class=articles-left>
-    <h2>View 1</h2>
-      <% @articles_one.each do |article| %>
-        <div class="articles-card-container">
-          <div class="articles-card-image">
-            <img src=<% article["image"]%> alt="article image">
-          </div>
-          <div class="article-card-info">
-            <p><%= article["category"].upcase %> </p>
-            <h5 class="info-title"><%= article["title"] %> </h5>
-            <p class="info-description"><%= article["description"] %> </p>
-            <p class="author">By: <%= article["author"] %> </p>
-          </div>
-          <div class="articles-card-date">
-            <%= article["published_at"] %>
-          </div>
-         </div>
-      <% end %>
-    </div>
-      <div class=articles-right>
-      <h2>View 2</h2>
-      <% @articles_two.each do |article| %>
-        <div class="articles-card-container">
-          <div class="articles-card-date">
-            <%= article["published_at"] %>
-          </div>
-          <div class="article-card-info">
-            <p><%= article["category"].upcase %> </p>
-            <h5 class="info-title"><%= article["title"] %> </h5>
-            <p class="info-description"><%= article["description"] %> </p>
-            <p class="author">By: <%= article["author"] %> </p>
-          </div>
-          <div class="articles-card-image">
-            <img src=<% article["image"]%> alt="article image">
-          </div>
-         </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<% if @comparison.articles_one %>
+  <%= render 'shared/show_articles_database', comparison: @comparison %>
+<% else %>
+  <%= render 'shared/show_articles_api', locals: { articles_one: @articles_one, articles_two: @articles_two, comparison: @comparison } %>
+<% end %>

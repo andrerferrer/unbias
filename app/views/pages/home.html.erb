@@ -1,17 +1,19 @@
-<div class="video">
-<video autoplay muted loop controls="hidden" class="background-video">
-  <source src="https://res.cloudinary.com/dci3qkzfc/video/upload/v1637678452/development/production_ID_4765224_irpyr6.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-  <h1>unbias.global</h1>
-  <h2>Balance your views to shake up your bias</h2>
-</div>
+<div class="maxi-container-home">
+  <div class="video">
+    <video autoplay muted loop controls="hidden" class="background-video">
+      <source src="https://res.cloudinary.com/dci3qkzfc/video/upload/v1637678452/development/production_ID_4765224_irpyr6.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+      <h1>Welcome to Unbias Global</h1>
+      <i><h3 id="sub-header-home">Discover news biases around the world and share them with others</h3 id="sub-header-home"></i>
 
-<div class="maxi-search-bar-home">
-  <%= simple_form_for Comparison.new do |f| %>
-    <%= f.input :topic %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.button :submit, 'Search', class: "button-primary" %>
-  <% end %>
- </div>
+    <div class="maxi-search-bar-home">
+      <%= simple_form_for Comparison.new do |f| %>
+        <%= f.input :topic %>
+        <%= f.input :start_date, input_html: {class: "datepicker"} %>
+        <%= f.input :end_date, input_html: {class: "datepicker"} %>
+        <%= f.button :submit, 'Search'%>
+      <% end %>
+    </div>
+  </div>
+</div>

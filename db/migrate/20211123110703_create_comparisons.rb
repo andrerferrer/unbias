@@ -11,7 +11,7 @@ class CreateComparisons < ActiveRecord::Migration[6.0]
       t.string :api_error
       t.string :comparison_name
       t.string :comparison_desription
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: true, foreign_key: true
 
       t.timestamps
     end

@@ -21,21 +21,8 @@ class ComparisonsController < ApplicationController
     @articles = JSON.parse(@response.body)["data"]
     generate_markers(@articles)
   end
-
-  def update
-    @comparison = Comparison.find(params[:id])
-    @comparison.publisher_one = params[:comparison][:publisher_one]
-    @comparison.publisher_two = params[:comparison][:publisher_two]
-    build_url(@comparison)
-    payload(@url_one)
-    @articles_one = JSON.parse(@response.body)["data"]
-    payload(@url_two)
-    @articles_two = JSON.parse(@response.body)["data"]
-    # save in db?
-    redirect_to comparison_path(@comparison)
-  end
-
-  def generate_markers(articles)
+  
+   def generate_markers(articles)
     sources = Source.where(name: articles.map { |article| article["source"].downcase })
     @markers = sources.geocoded.map do |source|
       {
@@ -47,18 +34,46 @@ class ComparisonsController < ApplicationController
     raise
   end
 
+  def update
+    @comparison = Comparison.find(params[:id])
+
+    # @comparison.publisher_one = params[:comparison][:publisher_one]
+    # @comparison.publisher_two = params[:comparison][:publisher_two]
+    if @comparison.update(publisher_one: params[:comparison][:publisher_one],
+                          publisher_two: params[:comparison][:publisher_two])
+      redirect_to comparison_path(@comparison)
+    else
+      :update
+    end
+  end
+
+  def show
+    @comparison = Comparison.find(params[:id])
+    build_url(@comparison)
+    payload(@url_one)
+    @articles_one = JSON.parse(@response.body)["data"]
+    @comparison.update(articles_one: @response.body)
+
+    payload(@url_two)
+    @articles_two = JSON.parse(@response.body)["data"]
+    @comparison.update(articles_two: @response.body)
+    redirect_to comparison_path(@comparison)
+  end
+
   private
+
+  def create_articles_and_entries
+  end
 
   def strong_params
     params.require(:comparison).permit(:topic, :start_date, :end_date)
   end
 
   def build_url(comparison)
-    # keyword = "&keywords=#{params[:comparison][:topic]}"
     keyword = "&keywords=#{comparison.topic}"
+    date = "&date=#{comparison.start_date},#{comparison.end_date}"
     publisher_one = "&sources=#{comparison.publisher_one}"
     publisher_two = "&sources=#{comparison.publisher_two}"
-    date = ""
     country_one = ""
     country_two = ""
 
@@ -72,6 +87,7 @@ class ComparisonsController < ApplicationController
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
 
     # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-3
+
 
   end
 
