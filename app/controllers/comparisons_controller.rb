@@ -21,7 +21,7 @@ class ComparisonsController < ApplicationController
     @articles = JSON.parse(@response.body)["data"]
     generate_markers(@articles)
   end
-  
+
    def generate_markers(articles)
     sources = Source.where(name: articles.map { |article| article["source"].downcase })
     @markers = sources.geocoded.map do |source|
@@ -31,7 +31,6 @@ class ComparisonsController < ApplicationController
         # info_window: render_to_string(partial: "info_window")
       }
     end
-    raise
   end
 
   def update
