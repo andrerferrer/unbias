@@ -1,7 +1,7 @@
 require 'faraday'
 require 'json'
 # maybe open-uri?
-BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en&sort=popularity"
+BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en"
 
 class ComparisonsController < ApplicationController
   def create
@@ -19,21 +19,7 @@ class ComparisonsController < ApplicationController
     build_url(@comparison)
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
-    @markers = #@articles.geocoded.map do |article|
-      [{
-        # lat: article.latitude,
-        # lng: article.longitude
-        lat: 2.1796691432813606,
-        lng: 41.37847940823762,
-        info_window: render_to_string(partial: "info_window")
-      },
-       {
-        # lat: article.latitude,
-        # lng: article.longitude
-        lat: 41.413763,
-        lng: 2.158040
-      }]
-    # end
+    generate_markers(@articles)
   end
 
   def update
@@ -47,6 +33,18 @@ class ComparisonsController < ApplicationController
     @articles_two = JSON.parse(@response.body)["data"]
     # save in db?
     redirect_to comparison_path(@comparison)
+  end
+
+  def generate_markers(articles)
+    sources = Source.where(name: articles.map { |article| article["source"].downcase })
+    @markers = sources.geocoded.map do |source|
+      {
+        lat: source.latitude,
+        lng: source.longitude
+        # info_window: render_to_string(partial: "info_window")
+      }
+    end
+    raise
   end
 
   private
@@ -68,11 +66,13 @@ class ComparisonsController < ApplicationController
     # Testing date: date = "&date=2020-12-24,2020-12-31"
 
     # Add #{date} to url
-    @url_worldmap = "#{BASE_URL}#{keyword}#{date}"
-    @url_one = "#{@url_worldmap}#{publisher_one}#{country_one}"
-    @url_two = "#{@url_worldmap}#{publisher_two}#{country_two}"
+    sources = "&sources=en,search,bbc,nytimes,cnn,the-guardian,watoday,EL+PAIS+English,chinadigitaltimes,chinaworker,Pakistan+Today,sundayworld,IOL,Thailand+Business+News,The+Korea+Herald,spectator,Manila+Bulletin,tribune,SunLive,dutchnews,thejournal,Indiatimes,The-Hindu,The-Star-online,Jerusalem-Post,Haaretz-Science&amp;Health"
+    @url_worldmap = "#{BASE_URL}#{keyword}#{date}#{sources}&limit=100"
+    @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
+    @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
 
-    # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-31
+    # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-3
+
   end
 
   def payload(url)

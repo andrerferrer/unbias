@@ -16,11 +16,12 @@
 
 
 
-    <%# <% @articles.each do |article| %>
-          <a href=<%#= article["url"]%>>
-            <p><%#= article["author"] %> </p>
-            <p><%#= article["title"] %> </p>
-            <p><%#= article["description"] %> </p>
-          <%#=article["published_at"] %>
-    <%#  end %> %>
+    <% @articles.each do |article| %>
+      <a href=<%= article["url"]%>>
+        <p>Author <span style="color: white"><%= article["author"] %></span> </p>
+        <p> title <span style="color: white"><%= article["title"] %></span> </p>
+        <p>description <span style="color: white"><%= article["description"] %></span> </p>
+        <p>source <span style="color: white"><%= article["source"] %></span> </p>
+      <%=article["published_at"] %>
+    <% end %>
 </div>
