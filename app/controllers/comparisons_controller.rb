@@ -1,7 +1,7 @@
 require 'faraday'
 require 'json'
 # maybe open-uri?
-BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en&sort=popularity"
+BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&limit=100&languages=en&sort=popularity"
 
 class ComparisonsController < ApplicationController
   def create
