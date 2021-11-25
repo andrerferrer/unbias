@@ -1,54 +1,5 @@
-<div class="comparison-container">
-  <h1>News comparison</h1>
-
-<% @articles_first_one = @articles_one.first(5) %>
-<% @articles_first_two = @articles_two.first(5) %>
-
-  <div class="articles-compare-container">
-    <div class=articles-left>
-    <h2>View 1</h2>
-      <% @articles_first_one.each do |article| %>
-        <div class="articles-card-container">
-          <div class="articles-card-image">
-            <img src=<%= article["image"]%> alt="article image">
-          </div>
-          <div>
-            <div class="articles-card-date-cat">
-              <p><%= article["category"].upcase %> </p>
-              <%= article["published_at"].first(10) %>
-            </div>
-            <div class="article-card-info">
-              <h5 class="info-title"><%= article["title"] %> </h5>
-              <p class="info-description"><%= article["description"] %> </p>
-              <p class="author">Source: <%= article["source"] %> </p>
-            </div>
-          </div>
-         </div>
-      <% end %>
-
-    </div>
-      <div class="articles-right">
-      <h2>View 2</h2>
-      <% @articles_first_two.each do |article| %>
-        <div class="articles-card-container">
-          <div>
-            <div class="articles-card-date-cat">
-              <%= article["published_at"].first(10) %>
-              <p><%= article["category"].upcase %> </p>
-            </div>
-            <div class="article-card-info">
-              <h5 class="info-title"><%= article["title"] %> </h5>
-              <p class="info-description"><%= article["description"] %> </p>
-              <p class="author">Source: <%= article["source"] %> </p>
-            </div>
-          </div>
-          <div class="articles-card-image">
-            <img src=<%= article["image"]%> alt="article image">
-          </div>
-         </div>
-      <% end %>
-    </div>
-  </div>
-
-  <%= link_to 'Save', comparison_create_entries_path(@comparison), method: :post %>
-</div>
+<% if @comparison.articles_one %>
+  <%= render 'shared/show_articles_database', comparison: @comparison %>
+<% else %>
+  <%= render 'shared/show_articles_api', locals: { articles_one: @articles_one, articles_two: @articles_two, comparison: @comparison } %>
+<% end %>
