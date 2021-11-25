@@ -16,13 +16,13 @@ class EntriesController < ApplicationController
 
   def create_iterator(array)
     array.each do |article|
-      token_api = (article["published_at"] + article["title"]).gsub(/\s+/, "")
+      token_api = (article["published_at"].to_s + article["title"]).gsub(/\s+/, "")
       if Article.find_by token: token_api
         @article = Article.find_by token: token_api
       else
         @article = Article.create(article)
-        token = (@article.published_at + @article.title).gsub(/\s+/, "")
-        @Article.update(token: token)
+        token = (@article.published_at.to_s + @article.title).gsub(/\s+/, "")
+        @article.update(token: token)
       end
       Entry.create(article: @article, comparison: @comparison)
     end

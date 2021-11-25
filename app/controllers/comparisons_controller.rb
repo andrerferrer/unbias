@@ -10,7 +10,7 @@ class ComparisonsController < ApplicationController
     if @comparison.save
       redirect_to worldmap_comparison_path(@comparison)
     else
-      redirect_to root_path
+      render 'pages/home'
     end
   end
 
