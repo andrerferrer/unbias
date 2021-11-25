@@ -22,15 +22,15 @@ class ComparisonsController < ApplicationController
     generate_markers(@articles)
   end
 
-   def generate_markers(articles)
-    sources = Source.where(name: articles.map { |article| article["source"].downcase })
-    @markers = sources.geocoded.map do |source|
-      {
-        lat: source.latitude,
-        lng: source.longitude
-        # info_window: render_to_string(partial: "info_window")
-      }
-    end
+  def generate_markers(articles)
+  sources = Source.where(name: articles.map { |article| article["source"].downcase })
+  @markers = sources.geocoded.map do |source|
+    {
+      lat: source.latitude,
+      lng: source.longitude
+      # info_window: render_to_string(partial: "info_window")
+    }
+  end
   end
 
   def update
@@ -56,13 +56,9 @@ class ComparisonsController < ApplicationController
     payload(@url_two)
     @articles_two = JSON.parse(@response.body)["data"]
     @comparison.update(articles_two: @response.body)
-    redirect_to comparison_path(@comparison)
   end
 
   private
-
-  def create_articles_and_entries
-  end
 
   def strong_params
     params.require(:comparison).permit(:topic, :start_date, :end_date)

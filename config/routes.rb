@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       get 'worldmap'
     end
     # get 'create-entries', to: 'entries#create_entries'
-    get 'create-entries', to: 'entries#create_entries'
+    post 'create-entries', to: 'entries#create_entries'
   end
 
   resource :board, only: [:show]
