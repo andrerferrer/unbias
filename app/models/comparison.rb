@@ -1,5 +1,5 @@
 class Comparison < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :entries, dependent: :destroy
   has_many :articles, through: :entries
   validates :topic, presence: true
