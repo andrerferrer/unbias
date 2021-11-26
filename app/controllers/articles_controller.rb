@@ -4,6 +4,5 @@ class ArticlesController < ApplicationController
     # create articles
     @articles_one
     @articles_two
-    raise
   end
 end
