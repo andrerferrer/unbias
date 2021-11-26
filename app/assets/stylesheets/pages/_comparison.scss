@@ -1,0 +1,20 @@
+.comparison-container {
+  background-color: #191A1A;
+  h1 {
+    background-color: #191A1A;
+    border-radius: 5px;
+    color: white;
+    margin-top: 30px;
+  }
+  h2 {
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: sticky; top: 0px;
+    z-index: +5;
+
+
+  }
+}
