@@ -275,7 +275,7 @@ source_eight = Source.create!(
                             address: "Amsterdam, Netherlands"
                             )
               Source.create!(
-                            name: "Independent",
+                            name: "The Independent",
                             source_keyword: "independent",
                             address: "Kensington, London, United Kingdom"
                             )
