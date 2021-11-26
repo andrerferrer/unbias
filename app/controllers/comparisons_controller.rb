@@ -76,8 +76,13 @@ class ComparisonsController < ApplicationController
     # Testing date: date = "&date=2020-12-24,2020-12-31"
 
     # Add #{date} to url
-    sources = "&sources=en,search,bbc,nytimes,cnn,the-guardian,watoday,EL+PAIS+English,chinadigitaltimes,chinaworker,Pakistan+Today,sundayworld,IOL,Thailand+Business+News,The+Korea+Herald,spectator,Manila+Bulletin,tribune,SunLive,dutchnews,thejournal,Indiatimes,The-Hindu,The-Star-online,Jerusalem-Post,Haaretz-Science&amp;Health"
-    @url_worldmap = "#{BASE_URL}#{keyword}#{date}#{sources}&limit=100"
+    sources = []
+    # "&sources=en,search,bbc,nytimes,cnn,the-guardian,watoday,EL+PAIS+English,chinadigitaltimes,chinaworker,Pakistan+Today,sundayworld,IOL,Thailand+Business+News,The+Korea+Herald,spectator,Manila+Bulletin,tribune,SunLive,dutchnews,thejournal,Indiatimes,The-Hindu,The-Star-online,Jerusalem-Post,Haaretz-Science&amp;Health"
+    Source.all.each do |source|
+      sources << source['source_keyword']
+    end
+    raise
+    @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')}&limit=100"
     @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
 
