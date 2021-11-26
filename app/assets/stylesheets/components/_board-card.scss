@@ -5,7 +5,10 @@
   padding-top: 8px;
 }
 
+#board-card-container {
+  margin: 0 auto;
 
+}
 .board-card-right a {
   background-color: black;
   color: white;
@@ -33,4 +36,12 @@
 
 .board-stats-text {
   color: white;
+}
+
+#headline-board-comparisons {
+  margin-top: 50px;
+}
+
+#share-icon {
+  filter: invert(100%);
 }

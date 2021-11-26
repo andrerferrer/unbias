@@ -2,18 +2,14 @@
 
 <div class="row">
 
-  <div class="col-sm-12 col-lg-7" style="background-color: black; min-height: 100vh;">
-  <h1 class="board-stats-text">You have:&nbsp<%= @comparisons.count %>&nbspcomparisons</h1>
-  </div>
-
-  <div class="col-sm-12 col-lg-5">
-  <h1>Comparisons</h1>
+  <div class="col-sm-12 col-lg-5" id="board-card-container">
+  <h1 id="headline-board-comparisons">Comparisons</h1>
   <% @comparisons.each do |comparison|%>
     <div class="board-card">
       <div class="container">
         <div class="row">
           <div class="board-card-left col-lg-7">
-            <h3><%= comparison.topic %></h3>
+            <h3><%= comparison.topic.capitalize %></h3>
             <p class="board-source"><%= comparison.publisher_one%></p>
             <p class="board-source"><%= comparison.publisher_two%></p>
           </div>
@@ -39,5 +35,12 @@
     </div>
   </div>
 <% end %>
+</div>
+
+  <div class="col-sm-12 col-lg-6" style="background-color: black; min-height: 100vh;">
+  <h1 class="board-stats-text" style="margin: 50px 0px 0px 30px;">You have:&nbsp<%= @comparisons.count %>&nbspcomparisons</h1>
+  <%= image_tag "share.svg" id="share-icon"%>
   </div>
+
+
 </div>
