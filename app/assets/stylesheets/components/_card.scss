@@ -6,12 +6,12 @@
 
 .articles-compare-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 25px;
 }
 
 .articles-left {
-  width: 50%;
+  width: 45%;
   margin-right: 12.5px;
   h2  {
     text-align: center;
@@ -28,7 +28,7 @@
 }
 
 .articles-right {
-  width: 50%;
+  width: 45%;
   margin-left: 12.5px;
   h2  {
     text-align: center;
@@ -107,6 +107,7 @@
     width: 250px;
     height: 100%;
     border-radius: 5px 0 0 5px;
+    border: solid 1px white;
   }
 }
 
