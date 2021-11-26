@@ -169,7 +169,7 @@ source_two = Source.create!(
 #                             name: "Jerusalem Post",
 #                             source_keyword: "jerusalem-post", # no
 #                             address: "Derech Ruppin, Jerusalem, Israel"
-                           )
+ #                          )
 
 # source_four = Source.create!(
 #                             name: "Haaretz",
