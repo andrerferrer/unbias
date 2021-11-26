@@ -152,6 +152,8 @@ article_ten = Article.create!(
 puts "created #{Article.count} articles"
 
 Source.destroy_all
+puts "Do we still have sources?"
+puts "#{Source.count}"
 puts "creating sources"
 
 # source_one = Source.create!(

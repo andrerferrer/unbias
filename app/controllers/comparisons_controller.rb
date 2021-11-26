@@ -38,6 +38,9 @@ class ComparisonsController < ApplicationController
 
     # @comparison.publisher_one = params[:comparison][:publisher_one]
     # @comparison.publisher_two = params[:comparison][:publisher_two]
+    # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
+    # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
+
     if @comparison.update(publisher_one: params[:comparison][:publisher_one],
                           publisher_two: params[:comparison][:publisher_two])
       redirect_to comparison_path(@comparison)
