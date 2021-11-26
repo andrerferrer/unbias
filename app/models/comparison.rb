@@ -9,17 +9,23 @@ class Comparison < ApplicationRecord
   # validates :country_two, if: (:publisher_one.nil? && :publisher_two.nil?), presence: true
   # validates :publisher_one, if: (:country_one.nil? && :country_two.nil?), presence: true
   # validates :publisher_two, if: (:country_one.nil? && :country_two.nil?), presence: true
-  SOURCES = ["cnn",
-             "bbc",
-             "The guardian",
-             "nytimes",
-             "search",
-             "thejournal",
-             "Indiatimes",
-             "The Hindu",
-             "The Star online",
-             "Jerusalem Post",
-             "Haaretz - Science &amp; Health"]
+  # SOURCES = ["cnn",
+  #            "bbc",
+  #            "The guardian",
+  #            "nytimes",
+  #            "search",
+  #            "thejournal",
+  #            "Indiatimes",
+  #            "The Hindu",
+  #            "The Star online",
+  #            "Jerusalem Post",
+  #            "Haaretz - Science &amp; Health"]
+
+  SOURCES = []
+
+  Source.all.each do |source|
+    SOURCES << source["name"]
+  end
 
   # SOURCES = Source.all.map do |source|
   #   source.name

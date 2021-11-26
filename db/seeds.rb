@@ -151,6 +151,7 @@ article_ten = Article.create!(
 
 puts "created #{Article.count} articles"
 
+Source.destroy_all
 puts "creating sources"
 
 # source_one = Source.create!(
@@ -169,7 +170,7 @@ source_two = Source.create!(
 #                             name: "Jerusalem Post",
 #                             source_keyword: "jerusalem-post", # no
 #                             address: "Derech Ruppin, Jerusalem, Israel"
- #                          )
+#                  )
 
 # source_four = Source.create!(
 #                             name: "Haaretz",
