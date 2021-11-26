@@ -156,14 +156,14 @@ puts "creating sources"
 
 # source_one = Source.create!(
 #                             name: "The Star",
-#                             source_keyword: "the+star+online", # no
+#                             source_keyword: "the-star-online", # no
 #                             address: "Jalan 16/11, 46350 Petaling Jaya, Selangor	Malaysia"
 #                            )
 
 source_two = Source.create!(
                             name: "The Japan Times",
                             source_keyword: "search",
-                            address: "Ichibancho-Daini-TG Bldg., 2-2 Ichiban-cho, Chiyoda-ku, Tokyo 102-0082	Japan"
+                            address: "Tokyo, Japan"
                            )
 
 # source_three = Source.create!(
@@ -181,25 +181,25 @@ source_two = Source.create!(
 source_five = Source.create!(
                             name: "The Journal",
                             source_keyword: "thejournal",
-                            address: "Golden Lane, Latin Hall, Dublin 8.	Ireland"
+                            address: "Dublin,	Ireland"
                            )
 
 source_six = Source.create!(
                             name: "India Times",
                             source_keyword: "indiatimes",
-                            address: "Times Of India Building, Dr DN Road, Fort — 400001.	India"
+                            address: "Mumbai,	India"
                            )
 
 source_seven = Source.create!(
                             name: "The Hindu",
                             source_keyword: "the-hindu",
-                            address: "The Hindu Kasturi Buildings 859 & 860 Anna Salai, Chennai Chennai District, Tamil Nadu India – 600002	India"
+                            address: "Chennai,	India"
                            )
 
 source_eight = Source.create!(
                             name: "BBC",
                             source_keyword: "bbc",
-                            address: "1 Television Centre, 101 Wood Lane W12 7FA London"
+                            address: "London, United Kingdom"
                             )
 
              Source.create!(
@@ -235,62 +235,62 @@ source_eight = Source.create!(
               Source.create!(
                             name: "Independent Online",
                             source_keyword: "iol",
-                            address: "47 Pixley Ka Isaka Seme St, Johannesburg, 2000, South Africa"
+                            address: "Johannesburg, South Africa"
                             )
               Source.create!(
                             name: "Thailand Business News",
                             source_keyword: "thailand-business-news",
-                            address: "The Hive Sukhumvit 49, Thonglor 10. North-Klongton , Wattana. Bangkok 10110"
+                            address: "Bangkok, Thailand"
                             )
               Source.create!(
                             name: "The Korea Herald",
                             source_keyword: "the-korea-herald",
-                            address: "Huam-ro 4-gil 10, Yongsan-gu, Seoul, Korea"
+                            address: "Seoul, Korea"
                             )
               Source.create!(
                             name: "The Slovak Spectator",
                             source_keyword: "spectator",
-                            address: "Lazaretská 12 811 08 Bratislava Slovakia"
+                            address: "Bratislava, Slovakia"
                             )
               Source.create!(
                             name: "Manila Bulletin",
                             source_keyword: "manila-bulletin",
-                            address: "Muralla cor Recoletos Sts. Intramuros, Manila 1002"
+                            address: "Manila, Philippines"
                             )
               Source.create!(
                             name: "Nigerian Tribune",
                             source_keyword: "tribune",
-                            address: "Tribune House, Imalefalafia Street, Oke-Ado, Ibadan. G.P.O Box 78, Dugbe, Ibadan"
+                            address: "Dugbe, Ibadan"
                             )
               Source.create!(
                             name: "SunLive",
                             source_keyword: "sunlive",
-                            address: "1 The Strand, Tauranga 3110, New Zealand"
+                            address: "Tauranga, New Zealand"
                             )
               Source.create!(
                             name: "Dutchnews",
                             source_keyword: "dutchnews",
-                            address: "Bellamyplein 51, 1053 AT Amsterdam, Netherlands"
+                            address: "Amsterdam, Netherlands"
                             )
               Source.create!(
                             name: "Independent",
                             source_keyword: "independent",
-                            address: "Northcliffe House, Kensington, London, United Kingdom"
+                            address: "Kensington, London, United Kingdom"
                             )
               Source.create!(
                             name: "Daily Mail",
                             source_keyword: "mail",
-                            address: "Northcliffe House, Kensington, London Borough of Kensington and Chelsea, London , United Kingdom"
+                            address: "Kensington, London , United Kingdom"
                             )
               Source.create!(
                             name: "The New York Times",
                             source_keyword: "NYtimes",
-                            address: "242 W 41st St, New York, NY 10036, usa"
+                            address: "New York, usa"
                             )
               Source.create!(
                             name: "CNN",
                             source_keyword: "cnn",
-                            address: "1 CNN Center Atlanta, Georgia 30303"
+                            address: "Atlanta, USA"
                             )
 
 puts "Created #{Source.count} sources."

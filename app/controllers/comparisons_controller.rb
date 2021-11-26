@@ -23,14 +23,14 @@ class ComparisonsController < ApplicationController
   end
 
   def generate_markers(articles)
-  sources = Source.where(name: articles.map { |article| article["source"].downcase })
-  @markers = sources.geocoded.map do |source|
-    {
-      lat: source.latitude,
-      lng: source.longitude
-      # info_window: render_to_string(partial: "info_window")
-    }
-  end
+    sources = Source.where(name: articles.map { |article| article["source"] })
+    @markers = sources.geocoded.map do |source|
+      {
+        lat: source.latitude,
+        lng: source.longitude
+        # info_window: render_to_string(partial: "info_window")
+      }
+    end
   end
 
   def update
@@ -69,7 +69,7 @@ class ComparisonsController < ApplicationController
     date = "&date=#{comparison.start_date},#{comparison.end_date}"
     s_one = Source.where(name: @comparison.publisher_one)
 
-      publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
+    publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
     s_two = Source.where(name: @comparison.publisher_two)
     publisher_two = "&sources=#{s_two[0]["source_keyword"]}" if s_two[0] != nil
     country_one = ""
