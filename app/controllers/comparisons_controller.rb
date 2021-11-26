@@ -67,8 +67,11 @@ class ComparisonsController < ApplicationController
   def build_url(comparison)
     keyword = "&keywords=#{comparison.topic}"
     date = "&date=#{comparison.start_date},#{comparison.end_date}"
-    publisher_one = "&sources=#{comparison.publisher_one}"
-    publisher_two = "&sources=#{comparison.publisher_two}"
+    s_one = Source.where(name: @comparison.publisher_one)
+
+      publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
+    s_two = Source.where(name: @comparison.publisher_two)
+    publisher_two = "&sources=#{s_two[0]["source_keyword"]}" if s_two[0] != nil
     country_one = ""
     country_two = ""
 
