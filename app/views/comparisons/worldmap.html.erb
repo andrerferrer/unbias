@@ -1,9 +1,11 @@
-<div style="background-color: #191a1a">
+<% sources = Source.where(name: @articles.map { |article| article["source"] }) %>
+<% sources = sources.map { |source| source.name } %>
 
+<div style="background-color: #191a1a">
   <div class="maxi-search-bar-home maxi-choose-bias-form">
     <%= simple_form_for @comparison do |f| %>
-      <%= f.input :publisher_one, collection: Comparison::SOURCES, selected: 1%>
-      <%= f.input :publisher_two, collection: Comparison::SOURCES, selected: 1%>
+      <%= f.input :publisher_one, collection: sources, selected: 1%>
+      <%= f.input :publisher_two, collection: sources, selected: 1%>
       <%= f.button :submit, 'Show', class: "button-white"%>
     <% end %>
   </div>
