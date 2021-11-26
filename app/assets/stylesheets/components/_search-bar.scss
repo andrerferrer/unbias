@@ -1,0 +1,36 @@
+.maxi-search-bar-home {
+  margin: 30px auto;
+  color: white;
+}
+
+.simple_form div {
+  display: inline-block;
+}
+
+
+.search-icon-maxi {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  color: white;
+  background-color: $main-option-1;
+  &:hover{
+  color: black;
+  background-color: black;
+  }
+}
+
+
+.maxi-choose-bias-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+#comparison_publisher_one {
+  width: 200px;
+}
+
+#comparison_publisher_two {
+  width: 200px;
+}

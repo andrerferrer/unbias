@@ -18,29 +18,9 @@ flex-direction: column;
 #sub-header-home {
   margin-top: 20px;
   color: white;
-}
-
-.maxi-search-bar-home {
-  margin: 30px auto;
-  color: white;
-}
-
-.simple_form div {
-  display: inline-block;
+  font-size: 25px;
 }
 
 #new_comparison {
   margin-top: 50px;
-}
-
-.search-icon-maxi {
-  height: 38px;
-  width: 38px;
-  border-radius: 50%;
-  color: white;
-  background-color: $main-option-1;
-  &:hover{
-  color: black;
-  background-color: black;
-  }
 }

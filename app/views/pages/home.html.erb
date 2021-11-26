@@ -5,13 +5,13 @@
       Your browser does not support the video tag.
     </video>
       <h1>Welcome to Unbias Global</h1>
-      <i><h3 id="sub-header-home">Discover news biases around the world and share them with others</h3 id="sub-header-home"></i>
+      <p id="sub-header-home">Discover news biases around the world and share them with others</p >
 
     <div class="maxi-search-bar-home">
       <%= simple_form_for @comparison do |f| %>
         <%= f.input :topic, placeholder: "What to search for?" %>
-        <%= f.input :start_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "When?"%>
-        <%= f.input :end_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "When?" %>
+        <%= f.input :end_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "When?", label: "From" %>
+        <%= f.input :start_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "When?", label: "To" %>
         <%= f.button :button, class: "search-icon-maxi" do %>
           <i style="color: white;" class="fas fa-search"></i>
         <% end %>
