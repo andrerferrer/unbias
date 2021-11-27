@@ -12,6 +12,13 @@
         <%= f.button :submit, 'Show', class: "button-white"%>
       <% end %>
     </div>
+    <div class="maxi-search-bar-home maxi-choose-bias-form">
+      <%= simple_form_for @comparison do |f| %>
+        <%= f.input :publisher_one, collection: sources, selected: 1, label: false %>
+        <%= f.input :publisher_two, collection: sources, selected: 5, label: false %>
+        <%= f.button :submit, 'Show', class: "button-white"%>
+      <% end %>
+    </div>
   <!-- RESULTS CONTROL - BEGIN -->
   <div style="color: white">
     <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
