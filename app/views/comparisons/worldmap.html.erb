@@ -1,31 +1,35 @@
-<div style="background-color: #191a1a">
+<div class="map-page" style="backgorund-color: #191A1A">
 
-<%sources = Comparison::SOURCES %>
-<% @articles.each do |article| %>
-  <% sources.select { |source|  source == article["source"]  }%>
-<% end %>
-
-  <div class="maxi-search-bar-home maxi-choose-bias-form">
-    <%= simple_form_for @comparison do |f| %>
-      <%= f.input :publisher_one, collection: sources, selected: 1%>
-      <%= f.input :publisher_two, collection: sources, selected: 1%>
-      <%= f.button :submit, 'Show', class: "button-white"%>
-    <% end %>
-  </div>
-
-  <div id="map"
-     style="width: 95%; height: 95vh; margin: 0 auto;"
-     data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
-
-<h1>For control: Articles</h1>
+  <%sources = Comparison::SOURCES %>
   <% @articles.each do |article| %>
-    <a href=<%= article["url"]%>>
-      <p>Author <span style="color: white"><%= article["author"] %></span> </p>
-      <p> title <span style="color: white"><%= article["title"] %></span> </p>
-      <p>description <span style="color: white"><%= article["description"] %></span> </p>
-      <p>source <span style="color: white"><%= article["source"] %></span> </p>
-    <%=article["published_at"] %>
+    <% sources.select { |source|  source == article["source"]  }%>
   <% end %>
+
+    <div class="maxi-search-bar-home maxi-choose-bias-form">
+      <%= simple_form_for @comparison do |f| %>
+        <%= f.input :publisher_one, collection: sources, selected: 1, label: false %>
+        <%= f.input :publisher_two, collection: sources, selected: 5, label: false %>
+        <%= f.button :submit, 'Show', class: "button-white"%>
+      <% end %>
+    </div>
+  <!-- RESULTS CONTROL - BEGIN -->
+  <div style="color: white">
+    <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
+  </div>
+  <!-- RESULTS CONTROL - END -->
+    <div id="map"
+      style="width: 100%; height:100vh; margin: 0 auto;"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+
+
+    <% @articles.each do |article| %>
+      <a href=<%= article["url"]%>>
+        <p>Author <span style="color: white"><%= article["author"] %></span> </p>
+        <p> title <span style="color: white"><%= article["title"] %></span> </p>
+        <p>description <span style="color: white"><%= article["description"] %></span> </p>
+        <p>source <span style="color: white"><%= article["source"] %></span> </p>
+      <%=article["published_at"] %>
+    <% end %>
 </div>
