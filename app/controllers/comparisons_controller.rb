@@ -29,18 +29,31 @@ class ComparisonsController < ApplicationController
     avg_textmood(@articles)
   end
 
+  def tally(articles)
+    tally = articles.map { |article| article["source"] }.tally
+    tally_2 = tally.map { |s| s[0] == /cnn/ }.tally
+
+  end
+
   def generate_markers(articles)
     @sources = Source.where(source_keyword: articles.map { |article| article["source"] })
               .or(Source.where(name: articles.map { |article| article["source"] }))
+    @tally = tally(articles)
+    # @tally[source['source_keyword']].to_i.times do
+      @markers = @sources.geocoded.map do |source|
+          {
+            lat: source.latitude,
+            lng: source.longitude,
+            info_window: render_to_string(partial: "info_window", locals: { source: source, articles: articles }),
+            image_url: helpers.asset_url('cnn-logo.png')
+            # info_window: render_to_string(partial: "info_window")
+          }
 
-    @markers = @sources.geocoded.map do |source|
-      {
-        lat: source.latitude,
-        lng: source.longitude,
-        image_url: helpers.asset_url('cnn-logo.png')
-        # info_window: render_to_string(partial: "info_window")
-      }
-    end
+        end
+      # end
+
+
+
   end
 
   def update
