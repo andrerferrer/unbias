@@ -4,18 +4,24 @@
   <div class="control-map">
     <div style="color: white">
       <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
+      <p><%= @articles_bbc.count %> ARTICLES_ALL: <%= @articles_bbc.map { |article| article["source"] }.tally %></p>
+      <p><%= @articles_cnn.count %> ARTICLES_ALL: <%= @articles_cnn.map { |article| article["source"] }.tally %></p>
   <!-- RESULTS CONTROL - END -->
-  <form>
-    <input type="checkbox" checked data-toggle="toggle" data-onstyle="dark" data-offstyle="light" data-on="News sources" data-off="Countries">
-  </form>
+
     </div>
       <%= @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
-                .or(Source.where(name: @articles.map { |article| article["source"] })) %>
+                .or(Source.where(name: @articles.map { |article| article["source"] }))
+                # CNN SOURCES
+                .or(Source.where(name: @articles_cnn.map { |article| article["source"][0,3] }))
+                .or(Source.where(source_keyword: @articles_cnn.map { |article| article["source"][0,3] }))
+                # BBC SOURCES
+                .or(Source.where(name: @articles_bbc.map { |article| article["source"][0,3] }))
+                .or(Source.where(source_keyword: @articles_bbc.map { |article| article["source"][0,3] })) %>
   </div>
   <div class="maxi-search-bar-home maxi-choose-bias-form absolute-form">
     <%= simple_form_for @comparison do |f| %>
-      <%= f.input :publisher_one, collection: @sources, selected: 1, label: false %>
-      <%= f.input :publisher_two, collection: @sources, selected: 225, label: false %>
+      <%= f.input :publisher_one, collection: @sources, selected: @sources.first.id, label: false %>
+      <%= f.input :publisher_two, collection: @sources, selected: @sources.last.id, label: false %>
       <%= f.button :submit, 'Show', class: "button-white"%>
     <% end %>
   </div>

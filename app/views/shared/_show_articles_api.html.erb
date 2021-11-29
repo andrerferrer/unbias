@@ -4,9 +4,10 @@
 <% @articles_first_two = @articles_two.first(5) %>
 <% @source = Source.where(name: @articles_first_one[0]["source"])  %>
 <% @source_two = Source.where(name: @articles_first_two[0]["source"])  %>
+
   <div class="articles-compare-container">
     <div class=articles-left>
-    <h2 class="header" id="myHeader"> <%= @source[0].name %> </h2>
+   <h2 class="header" id="myHeader"> <%= @articles_first_one.first["source"].capitalize %> </h2>
       <% @articles_first_one.each do |article| %>
         <div class="articles-card-container">
           <div class="articles-card-image">
@@ -20,7 +21,7 @@
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
               <p class="info-description"><%= article["description"] %> </p>
-              <p class="author">Source: <%= @source[0].name %> </p>
+              <p class="author">Source: <%= article["source"] %> </p>
             </div>
           </div>
          </div>
@@ -28,7 +29,7 @@
 
     </div>
       <div class="articles-right">
-      <h2 class="header" id="myHeader"> <%= @source_two[0].name %> </h2>
+      <h2 class="header" id="myHeader"> <%= @articles_first_two.first["source"].capitalize %> </h2>
       <% @articles_first_two.each do |article| %>
         <div class="articles-card-container">
           <div>
@@ -39,7 +40,7 @@
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
               <p class="info-description"><%= article["description"] %> </p>
-              <p class="author">Source: <%= @source_two[0].name %> </p>
+              <p class="author">Source: <%= article["source"] %></p>
             </div>
           </div>
           <div class="articles-card-image">
