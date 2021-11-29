@@ -14,6 +14,7 @@ const initMapbox = () => {
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
+    console.log(markers);
 
     addMarkersToMap(map, markers);
     // console.log(markers);
@@ -45,7 +46,10 @@ const addClusters = (map, markers) => {
         "type": "Feature",
         "geometry": {
           "type": "Point",
-          "coordinates": coordinates
+          "coordinates": coordinates,
+          cluster: true,
+          clusterMaxZoom: 14, // Max zoom to cluster points on
+          clusterRadius: 50,
         },
         // "properties": {
         //   "title": "Mapbox DC",
