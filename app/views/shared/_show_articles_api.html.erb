@@ -4,6 +4,7 @@
 <% @articles_first_two = @articles_two.first(5) %>
 <% @source = Source.where(name: @articles_first_one[0]["source"])  %>
 <% @source_two = Source.where(name: @articles_first_two[0]["source"])  %>
+
   <div class="articles-compare-container">
     <div class=articles-left>
     <h2 class="header" id="myHeader"> <%= @source[0].name %> </h2>
@@ -16,6 +17,9 @@
             <div class="articles-card-date-cat">
               <p><%= article["category"].upcase %> </p>
               <%= article["published_at"].first(10) %>
+              <%= link_to remove_article_one_path(@comparison, article), class: "maxi-remove-article-button" do %>
+               <i class="far fa-window-close"></i>
+              <% end %>
             </div>
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
@@ -24,6 +28,9 @@
             </div>
           </div>
          </div>
+      <% end %>
+      <%= link_to add_article_two_path(@comparison, article), class: "maxi-add-article-button" do %>
+        <i class="fas fa-plus-circle"></i>
       <% end %>
 
     </div>
@@ -35,6 +42,9 @@
             <div class="articles-card-date-cat">
               <%= article["published_at"].first(10) %>
               <p><%= article["category"].upcase %> </p>
+              <%= link_to remove_article_two_path(@comparison, article), class: "maxi-remove-article-button" do %>
+               <i class="far fa-window-close"></i>
+              <% end %>
             </div>
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
@@ -47,9 +57,11 @@
           </div>
          </div>
       <% end %>
+      <%= link_to add_article_two_path(@comparison, article), class: "maxi-add-article-button" do %>
+        <i class="fas fa-plus-circle"></i>
+      <% end %>
     </div>
   </div>
-
 
   <div class="save">
     <%= link_to 'Save Comparison', comparison_create_entries_path(@comparison), method: :post, class: "button-primary" %>

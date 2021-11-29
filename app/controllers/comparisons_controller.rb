@@ -38,12 +38,6 @@ class ComparisonsController < ApplicationController
 
   def update
     @comparison = Comparison.find(params[:id])
-
-    # @comparison.publisher_one = params[:comparison][:publisher_one]
-    # @comparison.publisher_two = params[:comparison][:publisher_two]
-    # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
-    # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
-
     if @comparison.update(publisher_one: params[:comparison][:publisher_one],
                           publisher_two: params[:comparison][:publisher_two])
       redirect_to comparison_path(@comparison)
@@ -57,6 +51,7 @@ class ComparisonsController < ApplicationController
     build_url(@comparison)
     payload(@url_one)
     @articles_one = JSON.parse(@response.body)["data"]
+
     @comparison.update(articles_one: @response.body)
 
     payload(@url_two)
