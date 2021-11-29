@@ -29,7 +29,8 @@ class ComparisonsController < ApplicationController
     @markers = @sources.geocoded.map do |source|
       {
         lat: source.latitude,
-        lng: source.longitude
+        lng: source.longitude,
+        image_url: helpers.asset_url('cnn-logo.png')
         # info_window: render_to_string(partial: "info_window")
       }
     end
