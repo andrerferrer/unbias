@@ -26,8 +26,8 @@ background-color: $black;
   margin-top: 50px;
 }
 
+p.notice {
+  display: none !important;
+}
 .maxi-container-home {
-  p.notice {
-    display: none;
-  }
 }

@@ -4,6 +4,7 @@ require 'json'
 BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en"
 
 class ComparisonsController < ApplicationController
+  # before_action :show, :filter_sources
   def create
     @comparison = Comparison.new(strong_params)
     @comparison.user = current_user
@@ -17,6 +18,10 @@ class ComparisonsController < ApplicationController
   def worldmap
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
+    payload(@url_cnn_worldmap)
+    @articles_cnn = JSON.parse(@response.body)["data"]
+    payload(@url_bbc_worldmap)
+    @articles_bbc = JSON.parse(@response.body)["data"]
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
     generate_markers(@articles)
@@ -61,6 +66,10 @@ class ComparisonsController < ApplicationController
 
   private
 
+  def filter_sources
+
+  end
+
   def strong_params
     params.require(:comparison).permit(:topic, :start_date, :end_date)
   end
@@ -68,10 +77,9 @@ class ComparisonsController < ApplicationController
   def build_url(comparison)
     keyword = "&keywords=#{comparison.topic}"
     date = "&date=#{comparison.start_date},#{comparison.end_date}"
-    s_one = Source.where(name: @comparison.publisher_one)
-
+    s_one = Source.where(id: @comparison.publisher_one)
     publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
-    s_two = Source.where(name: @comparison.publisher_two)
+    s_two = Source.where(id: @comparison.publisher_two)
     publisher_two = "&sources=#{s_two[0]["source_keyword"]}" if s_two[0] != nil
     country_one = ""
     country_two = ""
@@ -84,11 +92,12 @@ class ComparisonsController < ApplicationController
     Source.all.each do |source|
       sources << source['source_keyword']
     end
-    @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')}&limit=100"
+    @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')},-cnn,-bbc&limit=100"
+    @url_cnn_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=cnn&limit=15"
+    @url_bbc_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=bbc&limit=15"
     # @url_worldmap = "#{BASE_URL}#{keyword}#{date}&limit=100&sources=chinadigitaltimes"
     @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
-
     # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-3
   end
 
