@@ -3,6 +3,7 @@ body {
 min-height: 100vh;
 display: flex;
 flex-direction: column;
+background-color: $black;
 }
 
 .navbar-lewagon {
@@ -23,4 +24,10 @@ flex-direction: column;
 
 #new_comparison {
   margin-top: 50px;
+}
+
+.maxi-container-home {
+  p.notice {
+    display: none;
+  }
 }

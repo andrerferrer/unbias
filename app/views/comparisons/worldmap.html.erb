@@ -1,34 +1,29 @@
+<% content_for :nav, render('shared/form_navbar') %>
 <div class="map-page" style="backgorund-color: #191A1A">
-
-  <%sources = Comparison::SOURCES %>
-  <% @articles.each do |article| %>
-    <% sources.select { |source|  source == article["source"]  }%>
-  <% end %>
-
-    <div class="maxi-search-bar-home maxi-choose-bias-form">
-      <%= simple_form_for @comparison do |f| %>
-        <%= f.input :publisher_one, collection: sources, selected: 1, label: false %>
-        <%= f.input :publisher_two, collection: sources, selected: 5, label: false %>
-        <%= f.button :submit, 'Show', class: "button-white"%>
-      <% end %>
-    </div>
-    <div class="maxi-search-bar-home maxi-choose-bias-form">
-      <%= simple_form_for @comparison do |f| %>
-        <%= f.input :publisher_one, collection: sources, selected: 1, label: false %>
-        <%= f.input :publisher_two, collection: sources, selected: 5, label: false %>
-        <%= f.button :submit, 'Show', class: "button-white"%>
-      <% end %>
-    </div>
-  <!-- RESULTS CONTROL - BEGIN -->
-  <div style="color: white">
-    <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
-  </div>
+<!-- RESULTS CONTROL - BEGIN -->
+  <div class="control-map">
+    <div style="color: white">
+      <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
   <!-- RESULTS CONTROL - END -->
-    <div id="map"
-      style="width: 100%; height:100vh; margin: 0 auto;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  <form>
+    <input type="checkbox" checked data-toggle="toggle" data-onstyle="dark" data-offstyle="light" data-on="News sources" data-off="Countries">
+  </form>
     </div>
+      <%= @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
+                .or(Source.where(name: @articles.map { |article| article["source"] })) %>
+  </div>
+  <div class="maxi-search-bar-home maxi-choose-bias-form absolute-form">
+    <%= simple_form_for @comparison do |f| %>
+      <%= f.input :publisher_one, collection: @sources, selected: 1, label: false %>
+      <%= f.input :publisher_two, collection: @sources, selected: 225, label: false %>
+      <%= f.button :submit, 'Show', class: "button-white"%>
+    <% end %>
+  </div>
+  <div id="map"
+    style="width: 100%; height:100vh; margin: 0 auto;"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 
 
     <% @articles.each do |article| %>
