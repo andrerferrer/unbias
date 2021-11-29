@@ -76,3 +76,6 @@ gem 'cloudinary', '~> 1.16.0'
 
 # flatpickr for date
 gem 'flatpickr'
+
+#sentiment analysis
+gem 'textmood'
