@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_11_29_143159) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_143159) do
     t.string "country"
     t.string "language"
     t.string "token"
+    t.float "sentiment"
   end
 
   create_table "comparisons", force: :cascade do |t|
