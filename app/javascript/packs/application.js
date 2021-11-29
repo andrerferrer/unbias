@@ -37,3 +37,25 @@ document.addEventListener('turbolinks:load', () => {
   initFlatpickr();
   // myFunction();
 });
+
+
+
+// const removeButtons = document.querySelectorAll(".maxi-remove-article-button")
+
+// removeButtons.forEach((button) => {
+//   button.addEventListener('click', (event) => {
+//     console.log(event);
+//   });
+// });
+
+// const addButtons = document.querySelectorAll(".maxi-add-article-button")
+
+// addButtons.forEach((button) => {
+//   button.addEventListener('click', (event) => {
+//     console.log(event);
+//   });
+// });
+
+// const loadArticle(article) => {
+//   fetch()
+// };

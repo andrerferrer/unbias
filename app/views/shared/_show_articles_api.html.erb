@@ -1,14 +1,13 @@
 <div class="comparison-container">
 <h1>News comparison</h1>
-<% @articles_first_one = @articles_one.first(5) %>
-<% @articles_first_two = @articles_two.first(5) %>
-<% @source = Source.where(name: @articles_first_one[0]["source"])  %>
-<% @source_two = Source.where(name: @articles_first_two[0]["source"])  %>
+
+<% @source = Source.where(name: @articles_one[0]["source"])  %>
+<% @source_two = Source.where(name: @articles_two[0]["source"])  %>
 
   <div class="articles-compare-container">
     <div class=articles-left>
-   <h2 class="header" id="myHeader"> <%= @articles_first_one.first["source"].capitalize %> </h2>
-      <% @articles_first_one.each do |article| %>
+   <h2 class="header" id="myHeader"> <%= @articles_one.first["source"].capitalize %> </h2>
+      <% @articles_one.each do |article| %>
         <div class="articles-card-container">
           <div class="articles-card-image">
             <img src=<%= article["image"]%> alt="article image">
@@ -17,7 +16,9 @@
             <div class="articles-card-date-cat">
               <p><%= article["category"].upcase %> </p>
               <%= article["published_at"].first(10) %>
-              <p><%= article["sentiment"] %> </p>
+              <%= link_to comparison_remove_article_one_path(@comparison, article), class: "maxi-remove-article-button" do %>
+               <i class="far fa-window-close"></i>
+              <% end %>
             </div>
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
@@ -27,16 +28,22 @@
           </div>
          </div>
       <% end %>
+      <%= link_to comparison_add_article_two_path(@comparison), class: "maxi-add-article-button" do %>
+        <i class="fas fa-plus-circle"></i>
+      <% end %>
 
     </div>
       <div class="articles-right">
-      <h2 class="header" id="myHeader"> <%= @articles_first_two.first["source"].capitalize %> </h2>
-      <% @articles_first_two.each do |article| %>
+      <h2 class="header" id="myHeader"> <%= @articles_two.first["source"].capitalize %> </h2>
+      <% @articles_two.each do |article| %>
         <div class="articles-card-container">
           <div>
             <div class="articles-card-date-cat">
               <%= article["published_at"].first(10) %>
               <p><%= article["category"].upcase %> </p>
+              <%= link_to comparison_remove_article_two_path(@comparison, article), class: "maxi-remove-article-button" do %>
+               <i class="far fa-window-close"></i>
+              <% end %>
             </div>
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
@@ -49,9 +56,11 @@
           </div>
          </div>
       <% end %>
+      <%= link_to comparison_add_article_two_path(@comparison), class: "maxi-add-article-button" do %>
+        <i class="fas fa-plus-circle"></i>
+      <% end %>
     </div>
   </div>
-
 
   <div class="save">
     <%= link_to 'Save Comparison', comparison_create_entries_path(@comparison), method: :post, class: "button-primary" %>
