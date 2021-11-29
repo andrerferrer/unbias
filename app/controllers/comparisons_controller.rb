@@ -30,7 +30,6 @@ class ComparisonsController < ApplicationController
       {
         lat: source.latitude,
         lng: source.longitude,
-        image_url: helpers.asset_url('cnn-logo.png')
         # info_window: render_to_string(partial: "info_window")
       }
     end
