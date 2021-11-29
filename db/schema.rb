@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_170713) do
+ActiveRecord::Schema.define(version: 2021_11_29_100652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_170713) do
     t.string "country"
     t.string "language"
     t.string "token"
+    t.float "sentiment"
   end
 
   create_table "comparisons", force: :cascade do |t|

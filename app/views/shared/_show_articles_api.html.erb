@@ -17,6 +17,7 @@
             <div class="articles-card-date-cat">
               <p><%= article["category"].upcase %> </p>
               <%= article["published_at"].first(10) %>
+              <p><%= article["sentiment"] %> </p>
             </div>
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>

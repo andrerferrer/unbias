@@ -35,9 +35,13 @@
     <% @articles.each do |article| %>
       <a href=<%= article["url"]%>>
         <p>Author <span style="color: white"><%= article["author"] %></span> </p>
-        <p> title <span style="color: white"><%= article["title"] %></span> </p>
+        <p>title <span style="color: white"><%= article["title"] %></span> </p>
         <p>description <span style="color: white"><%= article["description"] %></span> </p>
         <p>source <span style="color: white"><%= article["source"] %></span> </p>
+        <p>sentiment title: <span style="color: white"><%= article["sentiment_title_string"] %></span> </p>
+        <p>sentiment title: <span style="color: white"><%= article["sentiment_title_score"]%></span> </p>
+        <p>sentiment description: <span style="color: white"><%= article["sentiment_description_string"] %></span> </p>
+        <p>sentiment description: <span style="color: white"><%= article["sentiment_description_score"]%></span>
       <%=article["published_at"] %>
     <% end %>
 </div>
