@@ -1,9 +1,17 @@
 <% content_for :nav, render('shared/form_navbar') %>
 <div class="map-page" style="backgorund-color: #191A1A">
-
+<!-- RESULTS CONTROL - BEGIN -->
+  <div class="control-map">
+    <div style="color: white">
+      <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
+  <!-- RESULTS CONTROL - END -->
   <form>
     <input type="checkbox" checked data-toggle="toggle" data-onstyle="dark" data-offstyle="light" data-on="News sources" data-off="Countries">
   </form>
+    </div>
+      <%= @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
+                .or(Source.where(name: @articles.map { |article| article["source"] })) %>
+  </div>
   <div class="maxi-search-bar-home maxi-choose-bias-form absolute-form">
     <%= simple_form_for @comparison do |f| %>
       <%= f.input :publisher_one, collection: @sources, selected: 1, label: false %>
@@ -18,15 +26,6 @@
   </div>
 
 
-  <!-- RESULTS CONTROL - BEGIN -->
-  <div class="control-map">
-    <div style="color: white">
-      <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
-    </div>
-      <%= @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
-                .or(Source.where(name: @articles.map { |article| article["source"] })) %>
-  </div>
-  <!-- RESULTS CONTROL - END -->
     <% @articles.each do |article| %>
       <a href=<%= article["url"]%>>
         <p>Author <span style="color: white"><%= article["author"] %></span> </p>
