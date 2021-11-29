@@ -23,8 +23,10 @@ class ComparisonsController < ApplicationController
   end
 
   def generate_markers(articles)
-    sources = Source.where(name: articles.map { |article| article["source"] })
-    @markers = sources.geocoded.map do |source|
+    @sources = Source.where(source_keyword: articles.map { |article| article["source"] })
+              .or(Source.where(name: articles.map { |article| article["source"] }))
+
+    @markers = @sources.geocoded.map do |source|
       {
         lat: source.latitude,
         lng: source.longitude
@@ -87,6 +89,7 @@ class ComparisonsController < ApplicationController
       sources << source['source_keyword']
     end
     @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')}&limit=100"
+    # @url_worldmap = "#{BASE_URL}#{keyword}#{date}&limit=100&sources=chinadigitaltimes"
     @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
 

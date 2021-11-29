@@ -1,5 +1,5 @@
 .maxi-search-bar-home {
-  margin: 30px auto;
+  // margin: 30px auto;
   color: white;
 }
 
@@ -7,13 +7,12 @@
   display: inline-block;
 }
 
-
 .search-icon-maxi {
   height: 38px;
   width: 38px;
   border-radius: 50%;
   color: white;
-  background-color: $main-option-1;
+  background-color: $main;
   &:hover{
   color: black;
   background-color: black;
