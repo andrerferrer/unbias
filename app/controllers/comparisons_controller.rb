@@ -55,13 +55,14 @@ class ComparisonsController < ApplicationController
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
     payload(@url_one)
-    @articles_one = JSON.parse(@response.body)["data"]
-
-    @comparison.update(articles_one: @response.body)
+    @articles_one = JSON.parse(@response.body)["data"].first(5)
+    @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
+    @comparison.update(selected_articles_one: @articles_one.to_json)
 
     payload(@url_two)
-    @articles_two = JSON.parse(@response.body)["data"]
-    @comparison.update(articles_two: @response.body)
+    @articles_two = JSON.parse(@response.body)["data"].first(5)
+    @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
+    @comparison.update(selected_articles_two: @articles_two.to_json)
   end
 
   private

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'remove-article-one', to: 'entries#remove_article_one'
     get 'remove-article-two', to: 'entries#remove_article_two'
     get 'add-article-one', to: 'entries#add_article_one'
-    get 'add-article-two', to: 'entries#add_article_one'
+    get 'add-article-two', to: 'entries#add_article_two'
   end
 
   resource :board, only: [:show]
