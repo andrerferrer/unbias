@@ -43,7 +43,6 @@ class ComparisonsController < ApplicationController
 
   def update
     @comparison = Comparison.find(params[:id])
-
     # @comparison.publisher_one = params[:comparison][:publisher_one]
     # @comparison.publisher_two = params[:comparison][:publisher_two]
     # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
