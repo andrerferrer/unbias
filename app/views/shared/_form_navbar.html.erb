@@ -5,7 +5,7 @@
 
   <div class="navbar-form">
     <%= simple_form_for @comparison do |f| %>
-      <%= f.input :topic, placeholder: "What to search for?" %>
+      <%= f.input :topic, placeholder: "Change topic" %>
       <%= f.input :end_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "From*", label: false  %>
       <%= f.input :start_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "To*", label: false %>
       <%= f.button :button, method: :post, class: "button-primary" do %>
