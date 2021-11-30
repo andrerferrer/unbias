@@ -18,3 +18,29 @@
 
   }
 }
+.maxi-add-article-button {
+  span {
+    text-decoration: none;
+    color: white;
+    font-family: 'Inconsolata';
+    font-weight: 500;
+    &:hover {
+      color: $main;
+      text-decoration: none;
+    }
+  }
+  &:hover {
+    color: $main !important;
+    text-decoration: none;
+  }
+  i:hover span {
+    color: $main;
+    text-decoration: none;
+  }
+}
+
+#fixedbutton {
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+}

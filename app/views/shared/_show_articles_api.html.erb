@@ -38,7 +38,7 @@
          </div>
       <% end %>
       <%= link_to comparison_add_article_one_path(comparison), class: "maxi-add-article-button" do %>
-        <i class="fas fa-plus-circle"></i>
+        <span style="float: right; direction:rtl"><i class="fas fa-plus-circle"> <span>Add article</span></i></span>
       <% end %>
 
     </div>
@@ -74,12 +74,12 @@
         <% end %>
       <% end %>
       <%= link_to comparison_add_article_two_path(comparison), class: "maxi-add-article-button" do %>
-        <i class="fas fa-plus-circle"></i>
+        <span><i class="fas fa-plus-circle"> <span>Add article</span></i></span>
       <% end %>
     </div>
   </div>
 
   <div class="save">
-    <%= link_to 'Save Comparison', comparison_create_entries_path(comparison), method: :post, class: "button-primary" %>
+    <%= link_to 'Save', comparison_create_entries_path(comparison), method: :post, class: "button-white", id: "fixedbutton" %>
   </div>
 </div>
