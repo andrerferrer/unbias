@@ -11,7 +11,7 @@
     <div class="articles-left" >
     <h2 class="header" id="myHeader"> <%= source[0].name %></h2>
       <% articles_one.each do |article| %>
-        <div class="articles-card-container" id="articles-results">
+        <div class="articles-card-container">
           <div class="articles-card-image">
             <img src=<%= article["image"]%> alt="article image">
           </div>
@@ -34,7 +34,7 @@
       <div class="articles-right" >
       <h2><%= source_two[0]["name"] %></h2>
       <% articles_two.each do |article| %>
-        <div class="articles-card-container" id="articles-results">
+        <div class="articles-card-container">
           <div>
             <div class="articles-card-date-cat">
               <%= article["published_at"].first(10) %>

@@ -6,13 +6,13 @@
 <h1>News comparison</h1>
 
   <div class="articles-compare-container">
-    <div class=articles-left>
+    <div class="articles-left">
    <h2 class="header" id="myHeader"> <%= articles_one.last["source"].capitalize unless (articles_one.empty? || articles_one.nil? ) %> </h2>
       <% articles_one.each do |article| %>
         <% if article.nil? %>
           <script>alert("No more articles available from this publisher.")</script>
         <% else %>
-          <div class="articles-card-container" id="articles-results">
+          <div class="articles-card-container">
             <div class="articles-card-image">
             <% if article["image"].nil? %>
               <%= image_tag "no-image.png", alt: "image not found" %>
@@ -48,7 +48,7 @@
         <% if article.nil? %>
           <script>alert("No more articles available from this publisher.")</script>
         <% else %>
-          <div class="articles-card-container" id="articles-results">
+          <div class="articles-card-container">
             <div>
               <div class="articles-card-date-cat">
                 <%= article["published_at"].first(10) %>
