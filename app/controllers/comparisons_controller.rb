@@ -49,8 +49,8 @@ class ComparisonsController < ApplicationController
             # info_window: render_to_string(partial: "info_window")
           }
 
-        end
-      # end
+
+      end
 
 
 
