@@ -79,3 +79,6 @@ gem 'flatpickr'
 
 #sentiment analysis
 gem 'textmood'
+
+#wordcounter
+gem 'words_counted'

@@ -8,9 +8,11 @@
 
 
 
+    <%= @tally[source.name].to_i + @tally[source.source_keyword[0,3]].to_i %>
+
 <%= av = @averages.map do |hash|
   hash.select do |key, value|
     [:source, :average_description].include? source.name
-    raise
   end
 end %>
+

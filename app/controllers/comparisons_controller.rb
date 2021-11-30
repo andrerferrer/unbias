@@ -1,6 +1,7 @@
 require 'faraday'
 require 'json'
 require 'textmood'
+require 'words_counted'
 # maybe open-uri?
 BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en"
 
@@ -35,6 +36,7 @@ class ComparisonsController < ApplicationController
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
     avg_textmood(@articles)
+    word_counter(@articles)
     generate_markers(@articles, @articles_cnn, @articles_bbc)
   end
 
@@ -151,11 +153,11 @@ class ComparisonsController < ApplicationController
     when 25..49
       "Positive"
     when 10..24
-      "Quite positive"
+      "Somewhat positive"
     when -10..9
       "Neutral"
     when -25..-11
-      "Quite negative"
+      "Somewhat negative"
     when -50..-26
       "Negative"
     when -75..-51
@@ -166,6 +168,15 @@ class ComparisonsController < ApplicationController
       "Unknown"
     end
   end
+
+  def word_counter(articles)
+    tokenized = ""
+    articles.each do |article|
+      tokenized += WordsCounted::Tokeniser.new(article["description"]).tokenise(exclude: "the at of and in for on - has an due to a as his with").join(" ")
+    end
+      @words = WordsCounted.count(tokenized).token_frequency
+  end
+
 
   private
 
