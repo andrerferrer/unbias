@@ -14,7 +14,11 @@
         <% else %>
           <div class="articles-card-container">
             <div class="articles-card-image">
+            <% if article["image"].nil? %>
+              <%= image_tag "no-image.png", alt: "image not found" %>
+            <% else %>
               <img src=<%= article["image"]%> alt="article image">
+            <% end %>
             </div>
             <div>
               <div class="articles-card-date-cat">
@@ -60,7 +64,11 @@
               </div>
             </div>
             <div class="articles-card-image">
+              <% if article["image"].nil? %>
+              <%= image_tag "no-image.png", alt: "image not found" %>
+            <% else %>
               <img src=<%= article["image"]%> alt="article image">
+            <% end %>
             </div>
           </div>
         <% end %>
