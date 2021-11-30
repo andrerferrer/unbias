@@ -1,19 +1,6 @@
-
-
-
-
 <% content_for :nav, render('shared/form_navbar') %>
-<div class="map-page" style="backgorund-color: #191A1A">
-<!-- RESULTS CONTROL - BEGIN -->
-  <div class="control-map">
-    <div style="color: white">
-      <p><%= @articles.count %> ARTICLES: <%= @articles.map { |article| article["source"] }.tally %></p>
-      <p><%= @articles_bbc.count %> ARTICLES_ALL: <%= @articles_bbc.map { |article| article["source"] }.tally %></p>
-      <p><%= @articles_cnn.count %> ARTICLES_ALL: <%= @articles_cnn.map { |article| article["source"] }.tally %></p>
-  <!-- RESULTS CONTROL - END -->
-
-    </div>
-      <%= @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
+  <div class="maxi-search-bar-home maxi-choose-bias-form absolute-form">
+  <% @sources = Source.where(source_keyword: @articles.map { |article| article["source"] })
                 .or(Source.where(name: @articles.map { |article| article["source"] }))
                 # CNN SOURCES
                 .or(Source.where(name: @articles_cnn.map { |article| article["source"][0,3] }))
@@ -21,8 +8,6 @@
                 # BBC SOURCES
                 .or(Source.where(name: @articles_bbc.map { |article| article["source"][0,3] }))
                 .or(Source.where(source_keyword: @articles_bbc.map { |article| article["source"][0,3] })) %>
-  </div>
-  <div class="maxi-search-bar-home maxi-choose-bias-form absolute-form">
     <%= simple_form_for @comparison do |f| %>
       <%= f.input :publisher_one, collection: @sources, selected: @sources.first.id, label: false %>
       <%= f.input :publisher_two, collection: @sources, selected: @sources.last.id, label: false %>
@@ -30,23 +15,9 @@
     <% end %>
   </div>
   <div id="map"
-    style="width: 100%; height:100vh; margin: 0 auto;"
+    style="width: 100%; height:83vh; margin: 0 auto;"
     data-markers="<%= @markers.to_json %>"
     data-counters="<%= @articles.map { |article| article["source"] }.tally %>"
     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-
-
-    <% @articles.each do |article| %>
-      <a href=<%= article["url"]%>>
-        <p>Author <span style="color: white"><%= article["author"] %></span> </p>
-        <p>title <span style="color: white"><%= article["title"] %></span> </p>
-        <p>description <span style="color: white"><%= article["description"] %></span> </p>
-        <p>source <span style="color: white"><%= article["source"] %></span> </p>
-        <p>sentiment title: <span style="color: white"><%= article["sentiment_title_string"] %></span> </p>
-        <p>sentiment title: <span style="color: white"><%= article["sentiment_title_score"]%></span> </p>
-        <p>sentiment description: <span style="color: white"><%= article["sentiment_description_string"] %></span> </p>
-        <p>sentiment description: <span style="color: white"><%= article["sentiment_description_score"]%></span>
-      <%=article["published_at"] %>
-    <% end %>
 </div>
