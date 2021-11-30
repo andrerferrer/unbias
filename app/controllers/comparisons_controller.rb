@@ -16,6 +16,12 @@ class ComparisonsController < ApplicationController
     end
   end
 
+  def destroy
+    @comparison = Comparison.find(params[:id])
+    @comparison.destroy
+    redirect_to board_path
+  end
+
   def worldmap
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
@@ -29,17 +35,18 @@ class ComparisonsController < ApplicationController
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
     avg_textmood(@articles)
-    generate_markers(@articles)
+    generate_markers(@articles, @articles_cnn, @articles_bbc)
   end
 
   def tally(articles)
-    tally = articles.map { |article| article["source"] }.tally
-    tally_2 = tally.map { |s| s[0] == /cnn/ }.tally
+    articles.map { |article| article["source"] }.tally
   end
 
-  def generate_markers(articles)
+  def generate_markers(articles, articles_cnn, articles_bbc)
     @sources = Source.where(source_keyword: articles.map { |article| article["source"] })
               .or(Source.where(name: articles.map { |article| article["source"] }))
+              .or(Source.where(name: "BBC"))
+              .or(Source.where(name: "CNN"))
     @tally = tally(articles)
     # @tally[source['source_keyword']].to_i.times do
       @markers = @sources.geocoded.map do |source|

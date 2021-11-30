@@ -5,4 +5,5 @@ class BoardsController < ApplicationController
       comparison.articles_one.present?
     end
   end
+
 end
