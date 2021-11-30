@@ -72,16 +72,20 @@ class ComparisonsController < ApplicationController
 
   def show
     @comparison = Comparison.find(params[:id])
+
     build_url(@comparison)
     payload(@url_one)
     @articles_one = JSON.parse(@response.body)["data"].first(5)
+    @source = Source.where(name: @articles_one[0]["source"])
     @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
     @comparison.update(selected_articles_one: @articles_one.to_json)
+    avg_textmood(@articles_one)
+
     payload(@url_two)
     @articles_two = JSON.parse(@response.body)["data"].first(5)
+    @source_two = Source.where(name: @articles_two[0]["source"])
     @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
     @comparison.update(selected_articles_two: @articles_two.to_json)
-    avg_textmood(@articles_one)
     avg_textmood(@articles_two)
   end
 
@@ -97,7 +101,6 @@ class ComparisonsController < ApplicationController
       article["sentiment_description_score"] = tm.analyze(article["description"])
       article["sentiment_description_string"] = stringify_sentiment(tm.analyze(article["description"]))
     end
-
 
     @averages = []
 
@@ -166,10 +169,6 @@ class ComparisonsController < ApplicationController
     country_one = ""
     country_two = ""
 
-    # date = "&date=#{params[:start_date]}#{params[:end_date]}"
-    # Testing date: date = "&date=2020-12-24,2020-12-31"
-
-    # Add #{date} to url
     sources = []
     Source.all.each do |source|
       sources << source['source_keyword']
@@ -177,10 +176,9 @@ class ComparisonsController < ApplicationController
     @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')},-cnn,-bbc&limit=100"
     @url_cnn_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=cnn&limit=15"
     @url_bbc_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=bbc&limit=15"
-    # @url_worldmap = "#{BASE_URL}#{keyword}#{date}&limit=100&sources=chinadigitaltimes"
+
     @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
-    # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-3
   end
 
   def payload(url)
