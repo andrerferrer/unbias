@@ -2,8 +2,8 @@ class EntriesController < ApplicationController
   before_action :set_comparison, only: %i[create_entries add_article_one add_article_two remove_article_one remove_article_two]
 
   def create_entries
-    @comparison.articles_one = @articles_one
-    @comparison.articles_two = @articles_two
+    @comparison.selected_articles_one = @articles_one
+    @comparison.selected_articles_two = @articles_two
 
     create_iterator(@articles_one)
     create_iterator(@articles_two)
