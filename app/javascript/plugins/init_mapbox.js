@@ -14,12 +14,12 @@ const initMapbox = () => {
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
-    const counters = JSON.stringify(mapElement.dataset.counters);
-    console.log(counters);
+    // const counters = JSON.stringify(mapElement.dataset.counters);
+    // console.log(counters);
 
 
 
-    addMarkersToMap(map, markers,counters);
+    addMarkersToMap(map, markers);
     // console.log(markers);
     // addClusters(map, markers, counters);
   }
@@ -31,13 +31,23 @@ const addMarkersToMap = (map, markers) => {
 
   markers.forEach((marker) => {
     const popup = new mapboxgl.Popup().setHTML(marker.info_window);
+    const element = document.createElement('div');
+    element.classList.add("markerStyling");
+    element.className = 'marker';
+    element.style.backgroundImage = `url('${marker.image_url}')`;
+    element.style.backgroundRepeat = 'no-repeat';
+    element.style.borderRadius = '50%';
+    element.style.backgroundColor = 'white';
+    element.style.backgroundSize = 'contain';
+    element.style.width = '50px';
+    element.style.height = '50px';
 
     // Create a HTML element for your custom marker
 
 
     // const popup = new mapboxgl.Popup().setHTML(marker.info_window); // add this
 
-    new mapboxgl.Marker()
+    new mapboxgl.Marker(element)
       .setLngLat([marker.lng, marker.lat])
       .setPopup(popup) // add this
       .addTo(map);

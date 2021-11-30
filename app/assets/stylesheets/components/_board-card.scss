@@ -45,3 +45,16 @@
 #share-icon {
   filter: invert(100%);
 }
+
+.fa-window-close{
+  color: $black;
+  &:hover {
+    color: $main;
+  }
+}
+.fa-plus-circle {
+  color: white;
+  &:hover {
+    color: $main;
+  }
+}

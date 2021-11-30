@@ -37,7 +37,6 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initFlatpickr();
   initWordCloud();
-  // myFunction();
 });
 
 

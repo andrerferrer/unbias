@@ -1,15 +1,16 @@
 <div class="comparison-container">
+<% articles_one = locals[:articles_one]  %>
+<% articles_two = locals[:articles_two]  %>
+<% comparison = locals[:comparison]  %>
+<% source = locals[:source]  %>
+<% source_two = locals[:source_two]  %>
+
   <h1><%= comparison.topic.capitalize %></h1>
 
-<% articles_first_one = JSON.parse(comparison.articles_one)["data"].first(5) %>
-<% articles_first_two = JSON.parse(comparison.articles_two)["data"].first(5) %>
-<% @source = Source.where(name: articles_first_one[0]["source"]) %>
-<% @source_two = Source.where(name: articles_first_two[0]["source"]) %>
-
   <div class="articles-compare-container">
-    <div class=articles-left>
-    <h2 class="header" id="myHeader"> <%= @source[0].name %></h2>
-      <% articles_first_one.each do |article| %>
+    <div class="articles-left" >
+    <h2 class="header" id="myHeader"> <%= source[0].name %></h2>
+      <% articles_one.each do |article| %>
         <div class="articles-card-container">
           <div class="articles-card-image">
             <img src=<%= article["image"]%> alt="article image">
@@ -23,16 +24,16 @@
               <h5 class="info-title"><%= article["title"] %> </h5>
               <p class="info-description"><%= article["description"] %> </p>
 
-              <p class="author">Source: <%= @source[0]["name"] %> </p>
+              <p class="author">Source: <%= source[0]["name"] %> </p>
             </div>
           </div>
          </div>
       <% end %>
 
     </div>
-      <div class="articles-right">
-      <h2><%= @source_two[0]["name"] %></h2>
-      <% articles_first_two.each do |article| %>
+      <div class="articles-right" >
+      <h2><%= source_two[0]["name"] %></h2>
+      <% articles_two.each do |article| %>
         <div class="articles-card-container">
           <div>
             <div class="articles-card-date-cat">
@@ -42,7 +43,7 @@
             <div class="article-card-info">
               <h5 class="info-title"><%= article["title"] %> </h5>
               <p class="info-description"><%= article["description"] %> </p>
-              <p class="author">Source: <%= @source_two[0]["name"] %> </p>
+              <p class="author">Source: <%= source_two[0]["name"] %> </p>
             </div>
           </div>
           <div class="articles-card-image">
@@ -51,9 +52,5 @@
          </div>
       <% end %>
     </div>
-  </div>
-
-  <div class="save">
-    <%= link_to 'Save Comparison', comparison_create_entries_path(comparison), method: :post, class: "button-primary" %>
   </div>
 </div>

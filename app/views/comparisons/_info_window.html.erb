@@ -1,5 +1,18 @@
+
 <h1>Test</h1>
 <%= source.name.capitalize %>
 
+<%# Faraday.get("http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en?sources=#{source}") %>
+<%#
+    <%= @tally[source.name].to_i + @tally[source.source_keyword] %>
+
+
 
     <%= @tally[source.name].to_i + @tally[source.source_keyword[0,3]].to_i %>
+
+<%= av = @averages.map do |hash|
+  hash.select do |key, value|
+    [:source, :average_description].include? source.name
+  end
+end %>
+

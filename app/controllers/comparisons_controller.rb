@@ -17,29 +17,38 @@ class ComparisonsController < ApplicationController
     end
   end
 
+  def destroy
+    @comparison = Comparison.find(params[:id])
+    @comparison.destroy
+    redirect_to board_path
+  end
+
   def worldmap
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
+
     payload(@url_cnn_worldmap)
     @articles_cnn = JSON.parse(@response.body)["data"]
+
     payload(@url_bbc_worldmap)
     @articles_bbc = JSON.parse(@response.body)["data"]
+
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
-    generate_markers(@articles)
     avg_textmood(@articles)
     word_counter(@articles)
+    generate_markers(@articles, @articles_cnn, @articles_bbc)
   end
 
   def tally(articles)
-    tally = articles.map { |article| article["source"] }.tally
-    tally_2 = tally.map { |s| s[0] == /cnn/ }.tally
-
+    articles.map { |article| article["source"] }.tally
   end
 
-  def generate_markers(articles)
+  def generate_markers(articles, articles_cnn, articles_bbc)
     @sources = Source.where(source_keyword: articles.map { |article| article["source"] })
               .or(Source.where(name: articles.map { |article| article["source"] }))
+              .or(Source.where(name: "BBC"))
+              .or(Source.where(name: "CNN"))
     @tally = tally(articles)
     # @tally[source['source_keyword']].to_i.times do
       @markers = @sources.geocoded.map do |source|
@@ -47,43 +56,56 @@ class ComparisonsController < ApplicationController
             lat: source.latitude,
             lng: source.longitude,
             info_window: render_to_string(partial: "info_window", locals: { source: source, articles: articles }),
-            image_url: helpers.asset_url('cnn-logo.png')
+            image_url: helpers.asset_url(source.img)
             # info_window: render_to_string(partial: "info_window")
           }
-
-        end
-      # end
-
-
-
+      end
   end
 
   def update
     @comparison = Comparison.find(params[:id])
-    # @comparison.publisher_one = params[:comparison][:publisher_one]
-    # @comparison.publisher_two = params[:comparison][:publisher_two]
-    # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
-    # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
-    if @comparison.update(publisher_one: params[:comparison][:publisher_one],
-                          publisher_two: params[:comparison][:publisher_two])
-      redirect_to comparison_path(@comparison)
+    if params[:comparison][:topic]
+      if @comparison.update(topic: params[:comparison][:topic],
+                            start_date: params[:comparison][:start_date],
+                            end_date: params[:comparison][:end_date])
+        redirect_to worldmap_comparison_path(@comparison)
+      else
+        :update
+      end
     else
-      :update
+      if @comparison.update(publisher_one: params[:comparison][:publisher_one],
+                            publisher_two: params[:comparison][:publisher_two])
+        redirect_to comparison_path(@comparison)
+      else
+        :update
+      end
     end
   end
 
   def show
     @comparison = Comparison.find(params[:id])
-    build_url(@comparison)
-    payload(@url_one)
-    @articles_one = JSON.parse(@response.body)["data"].first(5)
-    @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
-    @comparison.update(selected_articles_one: @articles_one.to_json)
-    payload(@url_two)
-    @articles_two = JSON.parse(@response.body)["data"].first(5)
-    @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
-    @comparison.update(selected_articles_two: @articles_two.to_json)
+
+    if @comparison.selected_articles_one
+      @articles_one = JSON.parse(@comparison.selected_articles_one)
+      @articles_two = JSON.parse(@comparison.selected_articles_two)
+
+    else
+      build_url(@comparison)
+      payload(@url_one)
+      @articles_one = JSON.parse(@response.body)["data"].first(5)
+      @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
+      @comparison.update(selected_articles_one: @articles_one.to_json)
+
+      payload(@url_two)
+      @articles_two = JSON.parse(@response.body)["data"].first(5)
+      @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
+      @comparison.update(selected_articles_two: @articles_two.to_json)
+    end
+
+    @source = Source.where(name: @articles_one[0]["source"])
     avg_textmood(@articles_one)
+
+    @source_two = Source.where(name: @articles_two[0]["source"])
     avg_textmood(@articles_two)
   end
 
@@ -159,7 +181,6 @@ class ComparisonsController < ApplicationController
   private
 
   def filter_sources
-
   end
 
   def strong_params
@@ -169,17 +190,15 @@ class ComparisonsController < ApplicationController
   def build_url(comparison)
     keyword = "&keywords=#{comparison.topic}"
     date = "&date=#{comparison.start_date},#{comparison.end_date}"
+
     s_one = Source.where(id: @comparison.publisher_one)
     publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
+
     s_two = Source.where(id: @comparison.publisher_two)
     publisher_two = "&sources=#{s_two[0]["source_keyword"]}" if s_two[0] != nil
     country_one = ""
     country_two = ""
 
-    # date = "&date=#{params[:start_date]}#{params[:end_date]}"
-    # Testing date: date = "&date=2020-12-24,2020-12-31"
-
-    # Add #{date} to url
     sources = []
     Source.all.each do |source|
       sources << source['source_keyword']
@@ -187,10 +206,9 @@ class ComparisonsController < ApplicationController
     @url_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=#{sources.join(',')},-cnn,-bbc&limit=100"
     @url_cnn_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=cnn&limit=15"
     @url_bbc_worldmap = "#{BASE_URL}#{keyword}#{date}&sources=bbc&limit=15"
-    # @url_worldmap = "#{BASE_URL}#{keyword}#{date}&limit=100&sources=chinadigitaltimes"
+
     @url_one = "#{BASE_URL}#{keyword}#{date}#{publisher_one}#{country_one}"
     @url_two = "#{BASE_URL}#{keyword}#{date}#{publisher_two}#{country_two}"
-    # Needs to be this format - probably need some date transformation: &date=2020-12-24,2020-12-3
   end
 
   def payload(url)

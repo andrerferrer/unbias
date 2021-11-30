@@ -95,6 +95,9 @@ body {
 .absolute-form {
   position: absolute;
   z-index: 9999999;
-  top: 200px;
-  left: 30px;
+  top: 120px;
+  left: 40px;
+  input[type="submit"] {
+    min-width: 90px;
+  }
 }

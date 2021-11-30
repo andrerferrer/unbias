@@ -7,7 +7,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 30px;
 }
 
 
@@ -22,4 +22,10 @@
 
 .navbar-light .navbar-nav a:hover {
   border-bottom: 2px solid $main;
+}
+
+.navbar-form {
+  form {
+    margin-top: 10px;
+  }
 }
