@@ -7,7 +7,7 @@ BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e
 class ComparisonsController < ApplicationController
   # before_action :show, :filter_sources
   def create
-    @comparison = Comparison.find(strong_params)
+    @comparison = Comparison.new(strong_params)
     @comparison.user = current_user
     if @comparison.save
       redirect_to worldmap_comparison_path(@comparison)
