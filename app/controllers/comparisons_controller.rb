@@ -1,5 +1,6 @@
 require 'faraday'
 require 'json'
+require 'textmood'
 # maybe open-uri?
 BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e136b8cd96&languages=en"
 
@@ -25,20 +26,34 @@ class ComparisonsController < ApplicationController
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
     generate_markers(@articles)
+    avg_textmood(@articles)
+  end
+
+  def tally(articles)
+    tally = articles.map { |article| article["source"] }.tally
+    tally_2 = tally.map { |s| s[0] == /cnn/ }.tally
+
   end
 
   def generate_markers(articles)
     @sources = Source.where(source_keyword: articles.map { |article| article["source"] })
               .or(Source.where(name: articles.map { |article| article["source"] }))
+    @tally = tally(articles)
+    # @tally[source['source_keyword']].to_i.times do
+      @markers = @sources.geocoded.map do |source|
+          {
+            lat: source.latitude,
+            lng: source.longitude,
+            info_window: render_to_string(partial: "info_window", locals: { source: source, articles: articles }),
+            image_url: helpers.asset_url('cnn-logo.png')
+            # info_window: render_to_string(partial: "info_window")
+          }
 
-    @markers = @sources.geocoded.map do |source|
-      {
-        lat: source.latitude,
-        lng: source.longitude,
-        image_url: helpers.asset_url('cnn-logo.png')
-        # info_window: render_to_string(partial: "info_window")
-      }
-    end
+
+      end
+
+
+
   end
 
   def update
@@ -59,25 +74,86 @@ class ComparisonsController < ApplicationController
         :update
       end
     end
-
     # @comparison.publisher_one = params[:comparison][:publisher_one]
     # @comparison.publisher_two = params[:comparison][:publisher_two]
     # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
     # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
-
-
   end
 
   def show
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
     payload(@url_one)
-    @articles_one = JSON.parse(@response.body)["data"]
-    @comparison.update(articles_one: @response.body)
-
+    @articles_one = JSON.parse(@response.body)["data"].first(5)
+    @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
+    @comparison.update(selected_articles_one: @articles_one.to_json)
     payload(@url_two)
-    @articles_two = JSON.parse(@response.body)["data"]
-    @comparison.update(articles_two: @response.body)
+    @articles_two = JSON.parse(@response.body)["data"].first(5)
+    @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
+    @comparison.update(selected_articles_two: @articles_two.to_json)
+    avg_textmood(@articles_one)
+    avg_textmood(@articles_two)
+  end
+
+  def avg_textmood(articles)
+    tm = TextMood.new(language: "en", normalize_score: true)
+    @source = Source.where(source_keyword: articles.map { |article| article["source"] })
+         .or(Source.where(name: articles.map { |article| article["source"] }))
+    @tally = articles.map { |article| article["source"] }.tally
+
+    articles.each do |article|
+      article["sentiment_title_score"] = tm.analyze(article["title"])
+      article["sentiment_title_string"] = stringify_sentiment(tm.analyze(article["title"]))
+      article["sentiment_description_score"] = tm.analyze(article["description"])
+      article["sentiment_description_string"] = stringify_sentiment(tm.analyze(article["description"]))
+    end
+
+
+    @averages = []
+
+    @tally.each do |key, value|
+      sum_title = 0
+      sum_description = 0
+      filtered_articles = articles.select do |article|
+        article[key] = key
+      end
+      filtered_articles.each do |article|
+        sum_title += article["sentiment_title_score"]
+        sum_description += article["sentiment_description_score"]
+      end
+
+      average_t = sum_title / value
+      @average_title = stringify_sentiment(average_t)
+      average_d = sum_description / value
+      @average_description = stringify_sentiment(average_d)
+
+      @averages << { "#{key} " => { average_title: @average_title, average_description: @average_description } }
+    end
+  end
+
+  def stringify_sentiment(number)
+    case number
+    when 75..100
+      "Overwhelmingly positive"
+    when 50..74
+      "Very positive"
+    when 25..49
+      "Positive"
+    when 10..24
+      "Quite positive"
+    when -10..9
+      "Neutral"
+    when -25..-11
+      "Quite negative"
+    when -50..-26
+      "Negative"
+    when -75..-51
+      "Very negative"
+    when -100..-76
+      "Overwhelmingly negative"
+    else
+      "Unknown"
+    end
   end
 
   private

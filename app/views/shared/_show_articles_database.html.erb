@@ -5,6 +5,7 @@
 <% articles_first_two = JSON.parse(comparison.articles_two)["data"].first(5) %>
 <% @source = Source.where(name: articles_first_one[0]["source"]) %>
 <% @source_two = Source.where(name: articles_first_two[0]["source"]) %>
+
   <div class="articles-compare-container">
     <div class=articles-left>
     <h2 class="header" id="myHeader"> <%= @source[0].name %></h2>
