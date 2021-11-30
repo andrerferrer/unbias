@@ -10,8 +10,9 @@
         <div class="row">
           <div class="board-card-left col-lg-7">
             <h3><%= comparison.topic.capitalize %></h3>
-            <p class="board-source"><%= comparison.publisher_one%></p>
-            <p class="board-source"><%= comparison.publisher_two%></p>
+            <p class="board-source"><%= Source.find(comparison.publisher_one).name %></p>
+            <p class="board-source"><%= Source.find(comparison.publisher_two).name%></p>
+
           </div>
           <div class="board-card-right col-lg-5">
             <%= link_to "Open Comparison", comparison_path(comparison)%>
