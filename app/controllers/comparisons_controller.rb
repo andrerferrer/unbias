@@ -7,7 +7,7 @@ BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e
 class ComparisonsController < ApplicationController
   # before_action :show, :filter_sources
   def create
-    @comparison = Comparison.find(strong_params)
+    @comparison = Comparison.new(strong_params)
     @comparison.user = current_user
     if @comparison.save
       redirect_to worldmap_comparison_path(@comparison)
@@ -32,7 +32,6 @@ class ComparisonsController < ApplicationController
   def tally(articles)
     tally = articles.map { |article| article["source"] }.tally
     tally_2 = tally.map { |s| s[0] == /cnn/ }.tally
-
   end
 
   def generate_markers(articles)
@@ -48,12 +47,7 @@ class ComparisonsController < ApplicationController
             image_url: helpers.asset_url('cnn-logo.png')
             # info_window: render_to_string(partial: "info_window")
           }
-
-
       end
-
-
-
   end
 
   def update
@@ -62,40 +56,44 @@ class ComparisonsController < ApplicationController
       if @comparison.update(topic: params[:comparison][:topic],
                             start_date: params[:comparison][:start_date],
                             end_date: params[:comparison][:end_date])
-       redirect_to worldmap_comparison_path(@comparison)
+        redirect_to worldmap_comparison_path(@comparison)
       else
         :update
       end
     else
       if @comparison.update(publisher_one: params[:comparison][:publisher_one],
-                             publisher_two: params[:comparison][:publisher_two])
-       redirect_to comparison_path(@comparison)
+                            publisher_two: params[:comparison][:publisher_two])
+        redirect_to comparison_path(@comparison)
       else
         :update
       end
     end
-    # @comparison.publisher_one = params[:comparison][:publisher_one]
-    # @comparison.publisher_two = params[:comparison][:publisher_two]
-    # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
-    # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
   end
 
   def show
     @comparison = Comparison.find(params[:id])
 
-    build_url(@comparison)
-    payload(@url_one)
-    @articles_one = JSON.parse(@response.body)["data"].first(5)
+    if @comparison.selected_articles_one
+      @articles_one = JSON.parse(@comparison.selected_articles_one)
+      @articles_two = JSON.parse(@comparison.selected_articles_two)
+
+    else
+      build_url(@comparison)
+      payload(@url_one)
+      @articles_one = JSON.parse(@response.body)["data"].first(5)
+      @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
+      @comparison.update(selected_articles_one: @articles_one.to_json)
+
+      payload(@url_two)
+      @articles_two = JSON.parse(@response.body)["data"].first(5)
+      @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
+      @comparison.update(selected_articles_two: @articles_two.to_json)
+    end
+
     @source = Source.where(name: @articles_one[0]["source"])
-    @comparison.update(articles_one: JSON.parse(@response.body)["data"].to_json)
-    @comparison.update(selected_articles_one: @articles_one.to_json)
     avg_textmood(@articles_one)
 
-    payload(@url_two)
-    @articles_two = JSON.parse(@response.body)["data"].first(5)
     @source_two = Source.where(name: @articles_two[0]["source"])
-    @comparison.update(articles_two: JSON.parse(@response.body)["data"].to_json)
-    @comparison.update(selected_articles_two: @articles_two.to_json)
     avg_textmood(@articles_two)
   end
 
@@ -162,7 +160,6 @@ class ComparisonsController < ApplicationController
   private
 
   def filter_sources
-
   end
 
   def strong_params
