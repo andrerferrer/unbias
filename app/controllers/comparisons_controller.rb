@@ -18,8 +18,10 @@ class ComparisonsController < ApplicationController
   def worldmap
     @comparison = Comparison.find(params[:id])
     build_url(@comparison)
+
     payload(@url_cnn_worldmap)
     @articles_cnn = JSON.parse(@response.body)["data"]
+
     payload(@url_bbc_worldmap)
     @articles_bbc = JSON.parse(@response.body)["data"]
     payload(@url_worldmap)
@@ -93,8 +95,10 @@ class ComparisonsController < ApplicationController
   def build_url(comparison)
     keyword = "&keywords=#{comparison.topic}"
     date = "&date=#{comparison.start_date},#{comparison.end_date}"
+
     s_one = Source.where(id: @comparison.publisher_one)
     publisher_one = "&sources=#{s_one[0]["source_keyword"]}" if s_one[0] != nil
+
     s_two = Source.where(id: @comparison.publisher_two)
     publisher_two = "&sources=#{s_two[0]["source_keyword"]}" if s_two[0] != nil
     country_one = ""
