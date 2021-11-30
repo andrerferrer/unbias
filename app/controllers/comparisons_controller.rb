@@ -25,6 +25,7 @@ class ComparisonsController < ApplicationController
 
     payload(@url_bbc_worldmap)
     @articles_bbc = JSON.parse(@response.body)["data"]
+
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
     avg_textmood(@articles)
