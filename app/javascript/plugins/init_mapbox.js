@@ -32,11 +32,15 @@ const addMarkersToMap = (map, markers) => {
   markers.forEach((marker) => {
     const popup = new mapboxgl.Popup().setHTML(marker.info_window);
     const element = document.createElement('div');
+    element.classList.add("markerStyling");
     element.className = 'marker';
     element.style.backgroundImage = `url('${marker.image_url}')`;
+    element.style.backgroundRepeat = 'no-repeat';
+    element.style.borderRadius = '50%';
+    element.style.backgroundColor = 'white';
     element.style.backgroundSize = 'contain';
-    element.style.width = '25px';
-    element.style.height = '25px';
+    element.style.width = '50px';
+    element.style.height = '50px';
 
     // Create a HTML element for your custom marker
 

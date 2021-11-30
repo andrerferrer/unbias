@@ -27,8 +27,8 @@ class ComparisonsController < ApplicationController
     @articles_bbc = JSON.parse(@response.body)["data"]
     payload(@url_worldmap)
     @articles = JSON.parse(@response.body)["data"]
-    generate_markers(@articles)
     avg_textmood(@articles)
+    generate_markers(@articles)
   end
 
   def tally(articles)
@@ -47,7 +47,7 @@ class ComparisonsController < ApplicationController
             lat: source.latitude,
             lng: source.longitude,
             info_window: render_to_string(partial: "info_window", locals: { source: source, articles: articles }),
-            image_url: helpers.asset_url('cnn-logo.png')
+            image_url: helpers.asset_url(source.img)
             # info_window: render_to_string(partial: "info_window")
           }
 

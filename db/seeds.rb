@@ -38,88 +38,109 @@ puts "creating sources"
 
 Source.create!(name: "ChinaDigitalTimes",
                source_keyword: "chinadigitaltimes",
-               address: "China")
+               address: "China",
+               img: "china-times.png")
 
 Source.create!(name: "Independent Online",
                source_keyword: "IOL",
-               address: "South Africa")
+               address: "South Africa",
+               img: "independent-online.png")
 
 Source.create!(name: "The Journal",
                source_keyword: "thejournal",
-               address: "Dublin")
+               address: "Dublin",
+               img: "journal-logo.png")
 
 Source.create!(name: "India Times",
                source_keyword: "Indiatimes",
-               address: "Mumbai, Maharastra, India")
+               address: "Mumbai, Maharastra, India",
+               img: "indiatimes-logo.png")
 
 Source.create!(name: "Sputnik",
                source_keyword: "en",
-               address: "Krasnoyarsk, Russia")
+               address: "Krasnoyarsk, Russia",
+               img: "sputnik-logo.png")
 
 Source.create!(name: "WAtoday",
                source_keyword: "watoday",
-               address: "Perth, Australia")
+               address: "Perth, Australia",
+               img: "watoday-logo.png")
 
 Source.create!(name: "The Slovak Spectator",
                source_keyword: "spectator",
-               address: "Bratislava, Slovakia")
+               address: "Bratislava, Slovakia",
+               img: "cnn-logo.png")
 
 Source.create!(name: "Nigerian Tribune",
                source_keyword: "tribune",
-               address: "Nigeria")
+               address: "Nigeria",
+               img: "tribune-online.png")
 
 Source.create!(name: "SunLive",
                source_keyword: "sunlive",
-               address: "Tauranga, New Zealand")
+               address: "Tauranga, New Zealand",
+               img: "sunlive.png")
 
 Source.create!(name: "Dutchnews",
                source_keyword: "dutchnews",
-               address: "Amsterdam, Netherlands")
+               address: "Amsterdam, Netherlands",
+               img: "dutchnews.png")
 
 Source.create!(name: "Independent",
                source_keyword: "independent",
-               address: "Kensington, London")
+               address: "Kensington, London",
+               img: "independent.png")
 
 Source.create!(name: "Daily Mail",
                source_keyword: "Mail",
-               address: "Oxford, UK")
+               address: "Oxford, UK",
+               img: "daily-mail-logo.png")
 
 Source.create!(name: "Manila Bulletin",
                source_keyword: "manila-bulletin",
-               address: "Manila, Philippines")
+               address: "Manila, Philippines",
+               img: "manila-bulletin.png")
 
 Source.create!(name: "The Hindu",
                source_keyword: "the-hindu",
-               address: "Chennai, India")
+               address: "Chennai, India",
+               img: "the-hindu.png")
 
 Source.create!(name: "Pakistan Today",
                source_keyword: "pakistan-today",
-               address: "Pakistan")
+               address: "Pakistan",
+               img: "pakistan-today.png")
 
 Source.create!(name: "The Korea Herald",
                source_keyword: "the-korea-herald",
-               address: "Seoul, Korea")
+               address: "Seoul, Korea",
+               img: "korea-herald.png")
 
 Source.create!(name: "Thailand Business News",
                source_keyword: "thailand-business-news",
-               address: "Bangkok, Thailand")
+               address: "Bangkok, Thailand",
+               img: "thailand-news.png")
 
 Source.create!(name: "The Star online",
                source_keyword: "the-star-online",
-               address: "Malaysia")
+               address: "Malaysia",
+               img: "the-star.png")
 
 Source.create!(name: "The Japan Times",
                source_keyword: "search",
-               address: "Tokyo, Japan")
+               address: "Tokyo, Japan",
+               img: "japan-times.png")
 
 Source.create!(name: "Jerusalem Post",
                source_keyword: "jerusalem-post",
-               address: "Jerusalem, Israel")
+               address: "Jerusalem, Israel",
+               img: "jerusalem-post.png")
 
 # SPECIAL ONES:
 Source.create!(name: "The New York Times",
                source_keyword: "nytimes",
-               address: "New York")
+               address: "New York",
+               img: "new-york-times.png")
 
 Source.create!(name: "CNN",
                source_keyword: "cnn",
