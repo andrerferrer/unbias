@@ -8,7 +8,7 @@
       <%= f.input :topic, placeholder: "Change topic" %>
       <%= f.input :end_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "From*", label: false  %>
       <%= f.input :start_date, as: :string, html5: true, input_html: {class: "datepicker"}, placeholder: "To*", label: false %>
-      <%= f.button :button,  method: :post,class: "button-primary" do %>
+      <%= f.button :button, method: :post, class: "button-primary" do %>
         Search
       <% end %>
     <% end %>

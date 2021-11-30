@@ -7,7 +7,7 @@ BASE_URL = "http://api.mediastack.com/v1/news?access_key=bc6099508dd0e4321fbe33e
 class ComparisonsController < ApplicationController
   # before_action :show, :filter_sources
   def create
-    @comparison = Comparison.new(strong_params)
+    @comparison = Comparison.find(strong_params)
     @comparison.user = current_user
     if @comparison.save
       redirect_to worldmap_comparison_path(@comparison)
@@ -58,16 +58,26 @@ class ComparisonsController < ApplicationController
 
   def update
     @comparison = Comparison.find(params[:id])
+    if params[:comparison][:topic]
+      if @comparison.update(topic: params[:comparison][:topic],
+                            start_date: params[:comparison][:start_date],
+                            end_date: params[:comparison][:end_date])
+       redirect_to worldmap_comparison_path(@comparison)
+      else
+        :update
+      end
+    else
+      if @comparison.update(publisher_one: params[:comparison][:publisher_one],
+                             publisher_two: params[:comparison][:publisher_two])
+       redirect_to comparison_path(@comparison)
+      else
+        :update
+      end
+    end
     # @comparison.publisher_one = params[:comparison][:publisher_one]
     # @comparison.publisher_two = params[:comparison][:publisher_two]
     # @publisher_one = Source.find(params[:comparison][:publisher_one]).source_keyword
     # @publisher_two = Source.find(params[:comparison][:publisher_two]).source_keyword
-    if @comparison.update(publisher_one: params[:comparison][:publisher_one],
-                          publisher_two: params[:comparison][:publisher_two])
-      redirect_to comparison_path(@comparison)
-    else
-      :update
-    end
   end
 
   def show
